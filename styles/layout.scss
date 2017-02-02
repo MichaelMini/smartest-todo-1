@@ -1,7 +1,8 @@
-body {
-  background-color: #EEE;
+/* Feel free to sass it up in the partials,
+or right here in the layout if partials scare you.
+Feel free to add partials news if needed.*/
+@import 'partials/variables';
+@import 'partials/body';
+@import 'partials/nav';
+@import 'partials/typography';
 
-  h1 {
-    color: #244751;
-  }
-}
