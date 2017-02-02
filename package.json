@@ -1,0 +1,30 @@
+{
+  "name": "smarter-todo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/johnkmeas/smart-todo.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/johnkmeas/smart-todo/issues"
+  },
+  "homepage": "https://github.com/johnkmeas/smart-todo#readme",
+  "dependencies": {
+    "bcrypt": "^1.0.2",
+    "body-parser": "^1.16.0",
+    "cookie-parser": "^1.4.3",
+    "cookie-session": "^2.0.0-alpha.2",
+    "ejs": "^2.5.5",
+    "express": "^4.14.1",
+    "knex": "^0.12.6",
+    "pg": "^6.1.2"
+  }
+}
