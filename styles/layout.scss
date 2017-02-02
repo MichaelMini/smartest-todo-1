@@ -5,3 +5,11 @@ body {
     color: #244751;
   }
 }
+
+form[action="/register"] {
+  display: flex;
+  flex-direction: column;
+  input {
+    width: 200px;
+  }
+}
