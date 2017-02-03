@@ -1,16 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Home Page</title>
+    <title>Smartest Todo</title>
     <%- include('partials/_head')%>
   </head>
 
   <body>
-    <h1>Hello World!</h1>
-    <form action="/search" method="POST" style="margin:150px;">
-      <label for="search">Enter a todo item.</label>
-      <input id="search" type="text" name="search" placeholder="Any item..." style="width: 300px">
-      <input type="submit" value="Submit">
-    </form>
+    <nav class="navbar navbar-default" style="border-radius: 0">
+      <div class="container-fluid">
+        <div class="navbar-header collapsed 1">
+        <span class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav navbar-right">
+            <button type="button" class="btn btn-default">Login</button>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+
+    <main>
+      <form action="/todo" method="POST" style="margin: 100px auto; width: 40%">
+        <h3>Enter a todo item.</h3>
+        <div class="input-group" style="width: 300px;">
+          <input id="search" type="text" name="search" placeholder="Any item..." class="form-control">
+          <span class="input-group-btn"><button value="Submit" class="btn btn-default">save</button></span>
+        </div>
+      </form>
+    </main>
+
   </body>
 </html>
