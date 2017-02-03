@@ -1,18 +1,16 @@
 require('dotenv').config();
 
-const ENV = ../process.env
-
 let Yelp = require('yelp');
 
 let yelp = new Yelp({
-  consumer_key: ENV.YELP_key,
-  consumer_secret: ENV.YELP_secret ,
-  token: ENV.YELP_token,
-  token_secret: ENV.YELP_token_secret,
+  consumer_key: process.env.YELP_key,
+  consumer_secret: process.env.YELP_secret ,
+  token: process.env.YELP_token,
+  token_secret: process.env.YELP_token_secret,
 });
 
 
-yelp.search({ term: 'Nice', location: 'Vancouver', category_filter: 'restaurants', limit: 10, sort: 0 })
+yelp.search({ term: 'tacofino', location: 'Vancouver', category_filter: 'restaurants', limit: 10, sort: 0 })
 .then(function (data) {
 
 
