@@ -4,6 +4,7 @@ require('dotenv').config();
 
 const PORT        = process.env.PORT || 8080;
 const ENV         = process.env.ENV || "development";
+const cookieSession = require('cookie-session');
 const express     = require("express");
 const bodyParser  = require("body-parser");
 const sass        = require("node-sass-middleware");
@@ -25,6 +26,12 @@ app.use(morgan('dev'));
 // Log knex SQL queries to STDOUT as well
 app.use(knexLogger(knex));
 
+app.use(cookieSession({
+  name: 'session',
+  keys: ['123'],
+  maxAge: 24 * 60 * 60 * 1000
+}))
+
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/styles", sass({
@@ -40,12 +47,31 @@ app.use("/api/users", usersRoutes(knex));
 
 // Register page
 app.get("/register", (req, res) => {
+  console.log("user_id", req.session.user_id);
   res.render("register");
 });
+
 app.post("/register", (req, res) => {
   const user_name = req.body.name;
   const password = req.body.password;
-  res.redirect("register");
+  knex('users')
+    .insert({'user_name': user_name, 'password': password})
+    .returning('id')
+    .asCallback((err, result) => {
+      if (err) {
+        console.log(err);
+        res.status(500).send("oh crap.  see server log.");
+        return;
+      }
+      console.log("hopefully the new userid is in this: ", result);
+      if (result.length !== 1) {
+        console.log("what the hell is with this non-length-1 result: ", result);
+        res.status(500).send("oh crap.  see server log.");
+        return;
+      }
+      req.session.user_id = result[0];
+      res.redirect("register");  // TODO: better redirect
+    });
 });
 
 // Home page
