@@ -1,19 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Home Page</title>
-    <% include partials/_head %>
+    <title>Register Page</title>
+    <%- include('partials/_head')%>
   </head>
-
   <body>
-    <h1>Register</h1>
-    <form action="/register" method="POST" style="margin:150px;">
-      <label for="user_name">Create User Name</label>
-      <input id="user_name" type="text" name="name" placeholder="Any item..." style="width: 300px">
-      <br>
-      <label for="password">Create Your Password Here</label>
-      <input id="password" type="text" name="password" placeholder="Any item..." style="width: 300px">
-      <input type="submit" value="Submit">
-    </form>
+    <section>
+      <h1>Login</h1>
+      <form action="/login" method="POST" style="margin:150px;">
+        <input id="email" type="text" name="name" placeholder="Enter your name here" style="width: 300px">
+        <input id="password" type="password" name="password" placeholder="Enter your password here" style="width: 300px">
+        <input type="submit" value="Submit">
+      </form>
+    </section>
+    <section>
+      <h1>Register</h1>
+      <form action="/register" method="POST" style="margin:150px;">
+        <label for="user_name">Create User Name</label>
+        <input id="user_name" type="text" name="name" placeholder="Any item..." style="width: 300px">
+        <br>
+        <label for="password">Create Your Password Here</label>
+        <input id="password" type="text" name="password" placeholder="Any item..." style="width: 300px">
+        <input type="submit" value="Submit">
+      </form>
+    </section>
   </body>
 </html>
