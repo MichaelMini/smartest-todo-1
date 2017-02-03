@@ -139,7 +139,19 @@ app.post("/register", (req, res) => {
 // });
 // Home page
 app.get("/", (req, res) => {
-  res.render("index");
+  knex.select('user_name').from('users').where('id', req.user)
+    .then((results) => {
+      console.log("hopefully the new userid is in this: ", results);
+      if (results.length !== 1) {
+        console.log("what the hell is with this non-length-1 result: ", results);
+        res.status(500).send("oh crap.  see server log.");
+          return;
+      }
+      // console.log(results[0].user_name);
+      let templateVar = results[0];
+      res.render("index", templateVar);
+    }
+  );
 });
 
 app.post("/search", (req, res) => {
