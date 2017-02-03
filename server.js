@@ -14,9 +14,12 @@ const knexConfig  = require("./knexfile");
 const knex        = require("knex")(knexConfig[ENV]);
 const morgan      = require('morgan');
 const knexLogger  = require('knex-logger');
+// const goodread    = require('./public/scripts/app');
 
 // Seperated Routes for each Resource
 const usersRoutes = require("./routes/users");
+
+const GoodreadsProvider = require('./api/goodread.js');
 
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
 // 'dev' = Concise output colored by response status for development use.
@@ -140,8 +143,21 @@ app.get("/", (req, res) => {
 });
 
 app.post("/search", (req, res) => {
-  const search = req.body.search;
-  res.redirect('/');
+  const term = req.body.search;
+
+  var allData = Promise.all([
+    GoodreadsProvider.search(term)
+  ])
+  .then(data => res.json(data));
+
+
+
+
+
+  // for each provider available
+  // provider.search(term).then(data) => store data
+  // return all data from all providers
+  // res.redirect('/');
 });
 
 app.listen(PORT, () => {
