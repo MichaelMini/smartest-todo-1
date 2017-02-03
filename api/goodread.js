@@ -1,22 +1,15 @@
-$(function(){
-  $('[action="/search"]').on('submit', function(event) {
-    event.preventDefault();
+const SimpleGoodreads = require('simple-goodreads');
 
-    let url = "https://www.goodreads.com/search?q=";
-    let searchitem = "It";
-    let searchparams = "&search_type=books&format=xml&";
-    let key = "key=JloI2IHbn0RppqrV7dtxg";
+var goodreads = new SimpleGoodreads();
 
-    $.ajax({
-      url: url+searchitem+searchparams+key,
-      method: 'get',
-      dataType: 'jsonp xml',
-
-      success: function(result){
-        console.log(url);
-        renderResults(result);
-      }
+module.exports = {
+  search(term)
+  {
+    return new Promise((resolve, reject) => {
+      goodreads.searchBook(term, (err, data) => {
+        if(err) { return reject(err); }
+        resolve(data);
+      });
     })
-
-  })
-});
+  }
+}
