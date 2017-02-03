@@ -38,9 +38,24 @@ app.use(express.static("public"));
 // Mount all resource routes
 app.use("/api/users", usersRoutes(knex));
 
+// Register page
+app.get("/register", (req, res) => {
+  res.render("register");
+});
+app.post("/register", (req, res) => {
+  const user_name = req.body.name;
+  const password = req.body.password;
+  res.redirect("register");
+});
+
 // Home page
 app.get("/", (req, res) => {
   res.render("index");
+});
+
+app.post("/search", (req, res) => {
+  const search = req.body.search;
+  res.redirect('/');
 });
 
 app.listen(PORT, () => {
