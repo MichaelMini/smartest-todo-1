@@ -20,9 +20,13 @@ const knexLogger  = require('knex-logger');
 const usersRoutes       = require("./routes/users");
 
 const GoodreadsProvider = require('./api/goodread.js');
+<<<<<<< HEAD
 const YelpProvider      = require('./api/yelp.js');
 
 
+=======
+const MovieDBProvider   = require('./api/moviedb.js');
+>>>>>>> 8f3c5428e9e22b5c269087afb9381a58f41569f8
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
 // 'dev' = Concise output colored by response status for development use.
 //         The :status token will be colored red for server error codes, yellow for client error codes, cyan for redirection codes, and uncolored for all other codes.
@@ -162,17 +166,12 @@ app.get("/", (req, res) => {
 
 app.post("/search", (req, res) => {
   const term = req.body.search;
-
-  var allData = Promise.all([
+  const allData = Promise.all([
     GoodreadsProvider.search(term),
+    MovieDBProvider.search(term),
     YelpProvider.search(term)
   ])
   .then(data => res.json(data));
-
-
-
-
-
   // for each provider available
   // provider.search(term).then(data) => store data
   // return all data from all providers

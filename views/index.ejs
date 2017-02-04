@@ -5,18 +5,23 @@
     <%- include('partials/_head')%>
   </head>
   <body>
-    <section>
-      <h3>This is <%= user_name %>'s Smartest Todo List!</h3>
-      <form action="/logout" method="POST">
-        <button type="submit">Logout</button>
-      </form>
-    </section>
-    <section>
-      <form action="/search" method="POST" style="margin:150px;">
-        <label for="search">Enter a todo item.</label>
-        <input id="search" type="text" name="search" placeholder="Any item..." style="width: 300px">
-        <input type="submit" value="Submit">
-      </form>
-    </section>
+  <%- include('partials/_nav')%>
+    <div class="containe-fluid">
+      <main>
+        <form action="/search" method="POST">
+          <div class="row">
+            <div class="col-xs-8 col-xs-offset-2 col-sm-6 col-sm-offset-3">
+              <div class="input-group">
+                <input id="search" type="text" name="search"  class="form-control" placeholder="Search for...">
+                <span class="input-group-btn">
+                  <button class="btn btn-default" value="Submit" type="submit">Go!</button>
+                </span>
+              </div><!-- /input-group -->
+            </div><!-- /.col-lg-6 -->
+          </div><!-- /.row -->
+        </form>
+
+      </main>
+    </div>
   </body>
 </html>

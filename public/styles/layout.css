@@ -2,7 +2,7 @@
 or right here in the layout if partials scare you.
 Feel free to add partials news if needed.*/
 body {
-  background-color: orange;
+  background-color: #e6e6e6;
 }
 
 form[action="/register"] {
@@ -12,6 +12,10 @@ form[action="/register"] {
 
 form[action="/register"] input {
   width: 200px;
+}
+
+.navbar {
+  border-radius: 0px;
 }
 
 h1 {
