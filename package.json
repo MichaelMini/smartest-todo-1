@@ -22,8 +22,8 @@
     "morgan": "^1.7.0",
     "node-sass-middleware": "^0.9.8",
     "pg": "^6.0.2",
+    "simple-goodreads": "^1.0.1",
     "the-rotten-api": "^1.1.0"
   },
-  "devDependencies": {
-  }
+  "devDependencies": {}
 }
