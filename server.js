@@ -164,8 +164,8 @@ app.post("/search", (req, res) => {
   const term = req.body.search;
 
   var allData = Promise.all([
-    GoodreadsProvider.search(term),
-    YelpProvider.search(term)
+    GoodreadsProvider.search(term)
+    // YelpProvider.search(term)
   ])
   .then(data => res.json(data));
 
