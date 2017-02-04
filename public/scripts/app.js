@@ -7,4 +7,9 @@ $(() => {
       $("<div>").text(user.name).appendTo($("body"));
     }
   });;
+
+  // toggle options
+  $('#divNewNotifications li > a').click(function(){
+    $('#text').text($(this).html());
+  });
 });

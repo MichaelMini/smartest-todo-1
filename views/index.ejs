@@ -19,26 +19,44 @@
               </div><!-- /input-group -->
             </div><!-- /.col-lg-6 -->
           </div><!-- /.row -->
-
-          <!-- BEGIN delete this code in the event of merge conflict -->
-          <table class="todo_entries">
-            <th> screw this header </th>
-
-            <% for (var item of todo_items) { %>
-              <tr>
-                <td> <%= item.todo_item_id %> </td>
-                <td> <%= item.name %> </td>
-                <td> <%= item.category %> </td>
-              </tr>
-            <% } %>
-
-
-          </table>
-          <!-- END delete this code in the event of merge conflict -->
-
-
+          <div class="row">
+            <div class="col-xs-8 col-xs-offset-2 col-sm-6 col-sm-offset-3">
+              <table class="table todo_entries">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Main Content</th>
+                    <th>
+                      <!-- Category -->
+                      <ul class="nav nav-pills left">
+                        <li class="dropdown active span8">
+                          <a class="dropdown-toggle" id="inp_impact" data-toggle="dropdown">
+                            <i class="icon icon-envelope icon-white"></i> <span id="text">Suggestion</span><span class="caret"></span>
+                          </a>
+                          <ul ID="divNewNotifications" class="dropdown-menu">
+                            <li><a>Food</a></li>
+                            <li><a>Movies</a></li>
+                            <li><a>Books</a></li>
+                            <li><a>Products</a></li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </th>
+                  </tr>
+                </thead>
+                <% for (var item of todo_items) { %>
+                  <tr>
+                    <td> <%= item.todo_item_id %> </td>
+                    <td> <%= item.name %> </td>
+                    <td> <%= item.category %> </td>
+                  </tr>
+                <% } %>
+              </table>
+            </div><!-- /.col-lg-6 -->
+          </div><!-- /.row -->
         </form>
       </main>
     </div>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   </body>
 </html>
