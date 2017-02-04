@@ -9,7 +9,6 @@ $(function(){
     // let url = "https://www.goodreads.com/search?q=";
     // let searchitem = "It";
     // let searchparams = "&search_type=books&format=xml&";
-    // let key = "key=JloI2IHbn0RppqrV7dtxg";
 
     // $.ajax({
     //   url: url+searchitem+searchparams+key,
