@@ -91,7 +91,7 @@ app.get("/register", (req, res) => {
   if (req.user) {
     res.redirect('/');
   }
-  console.log("user_id", req.user);
+  // console.log("user_id", req.user);
   res.render("register");
 });
 
