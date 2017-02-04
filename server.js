@@ -193,15 +193,21 @@ app.post("/search", (req, res) => {
     }
 
     let todo_item_id = Math.floor(Math.random() * 60) + 10;
-    let category = "Book";
-
-
-    if (term === "Casablanca") {
-      category = "Movie";
-    } else if (term.startsWith("Ronco")) {
-      category = "Product";
+    let cataOptions = Math.floor((Math.random() * 4) + 1);
+    let category = "";
+    switch (cataOptions) {
+        case 1:
+            category = "Books";
+            break;
+        case 2:
+            category = "Food";
+            break;
+        case 3:
+            category = "Movies";
+            break;
+        case 4:
+            category = "Products";
     }
-
     let outgoingResponse = {
       name: term,
       id: todo_item_id,
