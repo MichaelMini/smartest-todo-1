@@ -170,67 +170,71 @@ app.get("/", (req, res) => {
 
 app.post("/search", (req, res) => {
   const term = req.body.search;
-
-  // from http://stackoverflow.com/questions/31424561/wait-until-all-es6-promises-complete-even-rejected-promises
-  function reflect(promise){
-    return promise.then(function(v){ return {v:v, status: "resolved" }},
-                        function(e){ return {e:e, status: "rejected" }});
-  }
-
-  var allData = Promise.all([
-
-    GoodreadsProvider.search(term)//,
-    // YelpProvider.search(term)
-  ].map(reflect))//.then(console.log('from app.post in Server:', data))
-  // .then(data => res.send(data));
-  .then(function(apiResponses){
-
-    let goodReadsResponse;
-    if (apiResponses[0].e) {
-      goodReadsResponse = { }; // dummy data to deal with error in API call
-    } else {
-      goodReadsResponse = apiResponses[0];
+  if (!term) {
+    res.status(401).send('You left the input box empty when you submitted. <br><br> Please try again <a href="/">here</a>');
+    return;
+  } else {
+    // from http://stackoverflow.com/questions/31424561/wait-until-all-es6-promises-complete-even-rejected-promises
+    function reflect(promise){
+      return promise.then(function(v){ return {v:v, status: "resolved" }},
+                          function(e){ return {e:e, status: "rejected" }});
     }
 
-    let todo_item_id = Math.floor(Math.random() * 60) + 10;
-    let cataOptions = Math.floor((Math.random() * 4) + 1);
-    let category = "";
-    switch (cataOptions) {
-        case 1:
-            category = "Books";
-            break;
-        case 2:
-            category = "Food";
-            break;
-        case 3:
-            category = "Movies";
-            break;
-        case 4:
-            category = "Products";
-    }
-    let outgoingResponse = {
-      name: term,
-      id: todo_item_id,
-      category: category
-    };
-    console.log(outgoingResponse);
-    res.json(outgoingResponse);
-  })
-  .catch(function(error){
-    console.log("I thought we reflected until this stopped happening?", error);
-    res.json({
-      error: "not the bees" // TODO: don't be like Jeremy.  no one likes Nick Cage
+    var allData = Promise.all([
+
+      GoodreadsProvider.search(term)//,
+      // YelpProvider.search(term)
+    ].map(reflect))//.then(console.log('from app.post in Server:', data))
+    // .then(data => res.send(data));
+    .then(function(apiResponses){
+
+      let goodReadsResponse;
+      if (apiResponses[0].e) {
+        goodReadsResponse = { }; // dummy data to deal with error in API call
+      } else {
+        goodReadsResponse = apiResponses[0];
+      }
+
+      let todo_item_id = Math.floor(Math.random() * 60) + 10;
+      let cataOptions = Math.floor((Math.random() * 4) + 1);
+      let category = "";
+      switch (cataOptions) {
+          case 1:
+              category = "Books";
+              break;
+          case 2:
+              category = "Food";
+              break;
+          case 3:
+              category = "Movies";
+              break;
+          case 4:
+              category = "Products";
+      }
+      let outgoingResponse = {
+        name: term,
+        id: todo_item_id,
+        category: category
+      };
+      console.log(outgoingResponse);
+      res.json(outgoingResponse);
+    })
+    .catch(function(error){
+      console.log("I thought we reflected until this stopped happening?", error);
+      res.json({
+        error: "not the bees" // TODO: don't be like Jeremy.  no one likes Nick Cage
+      });
     });
-  });
 
 
 
 
 
-  // for each provider available
-  // provider.search(term).then(data) => store data
-  // return all data from all providers
-  // res.redirect('/');
+    // for each provider available
+    // provider.search(term).then(data) => store data
+    // return all data from all providers
+    // res.redirect('/');
+  }
 });
 
 app.listen(PORT, () => {
