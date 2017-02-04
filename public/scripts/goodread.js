@@ -7,6 +7,9 @@ function insertEntryInTodoList($domTable, entry){
   var thirdCol = $("<td>").text(entry.category);
   row.append(firstCol).append(secondCol).append(thirdCol);
   $domTable.append(row);
+  $('#search-item').text($("#search").val());
+  $('#text').text(entry.category);
+
 }
 
 $(function(){
