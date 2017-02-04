@@ -21,7 +21,7 @@
           </div><!-- /.row -->
           <div class="row">
             <div class="col-xs-8 col-xs-offset-2 col-sm-6 col-sm-offset-3">
-              <table class="table">
+              <table class="table todo_entries">
                 <thead>
                   <tr>
                     <th>#</th>
@@ -44,6 +44,13 @@
                     </th>
                   </tr>
                 </thead>
+                <% for (var item of todo_items) { %>
+                  <tr>
+                    <td> <%= item.todo_item_id %> </td>
+                    <td> <%= item.name %> </td>
+                    <td> <%= item.category %> </td>
+                  </tr>
+                <% } %>
               </table>
             </div><!-- /.col-lg-6 -->
           </div><!-- /.row -->
