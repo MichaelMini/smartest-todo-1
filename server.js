@@ -19,9 +19,10 @@ const knexLogger  = require('knex-logger');
 // Seperated Routes for each Resource
 const usersRoutes       = require("./routes/users");
 
-const GoodreadsProvider = require('./api/goodread.js');
+const AmazonProvider     = require('./api/amazon.js');
+const GoodreadsProvider  = require('./api/goodread.js');
+const MovieDBProvider    = require('./api/moviedb.js');
 const YelpProvider      = require('./api/yelp.js');
-
 
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
 // 'dev' = Concise output colored by response status for development use.
@@ -225,10 +226,6 @@ app.post("/search", (req, res) => {
         error: "not the bees" // TODO: don't be like Jeremy.  no one likes Nick Cage
       });
     });
-
-
-
-
 
     // for each provider available
     // provider.search(term).then(data) => store data

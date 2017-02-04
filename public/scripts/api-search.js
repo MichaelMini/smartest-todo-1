@@ -18,7 +18,7 @@ $(function(){
     // TODO: blank the search bar
     event.preventDefault();
     var data = $(this).serialize();
-
+    console.log(data);
     $.post('/search', data).then(function(data) {
       if (data.error) {
         console.log("sadface.  no todo entry for you.");
