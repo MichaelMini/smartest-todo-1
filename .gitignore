@@ -1,4 +1,5 @@
 node_modules/
+knexfile.js
 .env
 *.log
 *.sqlite3
