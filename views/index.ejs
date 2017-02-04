@@ -6,7 +6,7 @@
   </head>
   <body>
   <%- include('partials/_nav')%>
-    <div class="containe-fluid">
+    <div class="container-fluid">
       <main>
         <form action="/search" method="POST">
           <div class="row">
@@ -19,8 +19,25 @@
               </div><!-- /input-group -->
             </div><!-- /.col-lg-6 -->
           </div><!-- /.row -->
-        </form>
 
+          <!-- BEGIN delete this code in the event of merge conflict -->
+          <table class="todo_entries">
+            <th> screw this header </th>
+
+            <% for (var item of todo_items) { %>
+              <tr>
+                <td> <%= item.todo_item_id %> </td>
+                <td> <%= item.name %> </td>
+                <td> <%= item.category %> </td>
+              </tr>
+            <% } %>
+
+
+          </table>
+          <!-- END delete this code in the event of merge conflict -->
+
+
+        </form>
       </main>
     </div>
   </body>

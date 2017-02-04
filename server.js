@@ -151,7 +151,15 @@ app.get("/", (req, res) => {
             return;
         }
         // console.log(results[0].user_name);
-        let templateVar = results[0];
+        console.log("I hate everything about you -- Ugly Kid Joe");
+        let templateVar = {
+          user_name: results[0].user_name,
+          todo_items: [
+            { todo_item_id: 22, name: "be awesome", category: "Life Goal" },
+            { todo_item_id: 26, name: "breath", category: "Product" },
+            { todo_item_id: 32, name: "rawk", category: "Music" },
+          ]
+        };
         res.render("index", templateVar);
       }
     );
@@ -163,11 +171,51 @@ app.get("/", (req, res) => {
 app.post("/search", (req, res) => {
   const term = req.body.search;
 
+  // from http://stackoverflow.com/questions/31424561/wait-until-all-es6-promises-complete-even-rejected-promises
+  function reflect(promise){
+    return promise.then(function(v){ return {v:v, status: "resolved" }},
+                        function(e){ return {e:e, status: "rejected" }});
+  }
+
   var allData = Promise.all([
-    GoodreadsProvider.search(term)
+
+    GoodreadsProvider.search(term)//,
     // YelpProvider.search(term)
-  ])
-  .then(data => res.json(data));
+  ].map(reflect))//.then(console.log('from app.post in Server:', data))
+  // .then(data => res.send(data));
+  .then(function(apiResponses){
+
+    let goodReadsResponse;
+    if (apiResponses[0].e) {
+      goodReadsResponse = { }; // dummy data to deal with error in API call
+    } else {
+      goodReadsResponse = apiResponses[0];
+    }
+
+    let todo_item_id = Math.floor(Math.random() * 60) + 10;
+    let category = "Book";
+
+
+    if (term === "Casablanca") {
+      category = "Movie";
+    } else if (term.startsWith("Ronco")) {
+      category = "Product";
+    }
+
+    let outgoingResponse = {
+      name: term,
+      id: todo_item_id,
+      category: category
+    };
+    console.log(outgoingResponse);
+    res.json(outgoingResponse);
+  })
+  .catch(function(error){
+    console.log("I thought we reflected until this stopped happening?", error);
+    res.json({
+      error: "not the bees" // TODO: don't be like Jeremy.  no one likes Nick Cage
+    });
+  });
 
 
 
