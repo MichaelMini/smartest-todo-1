@@ -17,9 +17,11 @@ const knexLogger  = require('knex-logger');
 // const goodread    = require('./public/scripts/app');
 
 // Seperated Routes for each Resource
-const usersRoutes = require("./routes/users");
+const usersRoutes       = require("./routes/users");
 
 const GoodreadsProvider = require('./api/goodread.js');
+const YelpProvider      = require('./api/yelp.js');
+
 
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
 // 'dev' = Concise output colored by response status for development use.
@@ -162,7 +164,8 @@ app.post("/search", (req, res) => {
   const term = req.body.search;
 
   var allData = Promise.all([
-    GoodreadsProvider.search(term)
+    GoodreadsProvider.search(term),
+    YelpProvider.search(term)
   ])
   .then(data => res.json(data));
 
