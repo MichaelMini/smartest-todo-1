@@ -17,11 +17,13 @@ const knexLogger  = require('knex-logger');
 // const goodread    = require('./public/scripts/app');
 
 // Seperated Routes for each Resource
-const usersRoutes = require("./routes/users");
+const usersRoutes       = require("./routes/users");
 
 const AmazonProvider     = require('./api/amazon.js');
 const GoodreadsProvider  = require('./api/goodread.js');
 const MovieDBProvider    = require('./api/moviedb.js');
+const YelpProvider      = require('./api/yelp.js');
+
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
 // 'dev' = Concise output colored by response status for development use.
 //         The :status token will be colored red for server error codes, yellow for client error codes, cyan for redirection codes, and uncolored for all other codes.
@@ -90,7 +92,7 @@ app.get("/register", (req, res) => {
   if (req.user) {
     res.redirect('/');
   }
-  console.log("user_id", req.user);
+  // console.log("user_id", req.user);
   res.render("register");
 });
 
@@ -150,7 +152,15 @@ app.get("/", (req, res) => {
             return;
         }
         // console.log(results[0].user_name);
-        let templateVar = results[0];
+        console.log("I hate everything about you -- Ugly Kid Joe");
+        let templateVar = {
+          user_name: results[0].user_name,
+          todo_items: [
+            { todo_item_id: 22, name: "be awesome", category: "Life Goal" },
+            { todo_item_id: 26, name: "breath", category: "Product" },
+            { todo_item_id: 32, name: "rawk", category: "Music" },
+          ]
+        };
         res.render("index", templateVar);
       }
     );
@@ -161,17 +171,67 @@ app.get("/", (req, res) => {
 
 app.post("/search", (req, res) => {
   const term = req.body.search;
-  const allData = Promise.all([
-    AmazonProvider.search(term)
-    // GoodreadsProvider.search(term),
-    // MovieDBProvider.search(term)
-  ])
-  .then(data => res.json(data));
+  if (!term) {
+    res.status(401).send('You left the input box empty when you submitted. <br><br> Please try again <a href="/">here</a>');
+    return;
+  } else {
+    // from http://stackoverflow.com/questions/31424561/wait-until-all-es6-promises-complete-even-rejected-promises
+    function reflect(promise){
+      return promise.then(function(v){ return {v:v, status: "resolved" }},
+                          function(e){ return {e:e, status: "rejected" }});
+    }
 
-  // for each provider available
-  // provider.search(term).then(data) => store data
-  // return all data from all providers
-  // res.redirect('/');
+    var allData = Promise.all([
+
+      GoodreadsProvider.search(term)//,
+      // YelpProvider.search(term)
+    ].map(reflect))//.then(console.log('from app.post in Server:', data))
+    // .then(data => res.send(data));
+    .then(function(apiResponses){
+
+      let goodReadsResponse;
+      if (apiResponses[0].e) {
+        goodReadsResponse = { }; // dummy data to deal with error in API call
+      } else {
+        goodReadsResponse = apiResponses[0];
+      }
+
+      let todo_item_id = Math.floor(Math.random() * 60) + 10;
+      let cataOptions = Math.floor((Math.random() * 4) + 1);
+      let category = "";
+      switch (cataOptions) {
+          case 1:
+              category = "Books";
+              break;
+          case 2:
+              category = "Food";
+              break;
+          case 3:
+              category = "Movies";
+              break;
+          case 4:
+              category = "Products";
+      }
+      let outgoingResponse = {
+        name: term,
+        id: todo_item_id,
+        category: category
+      };
+      console.log(outgoingResponse);
+      res.json(outgoingResponse);
+    })
+    .catch(function(error){
+      console.log("I thought we reflected until this stopped happening?", error);
+      res.json({
+        error: "not the bees" // TODO: don't be like Jeremy.  no one likes Nick Cage
+      });
+    });
+
+    // for each provider available
+    // provider.search(term).then(data) => store data
+    // return all data from all providers
+    // res.redirect('/');
+  }
 });
 
 app.listen(PORT, () => {

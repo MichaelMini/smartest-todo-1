@@ -9,3 +9,12 @@ form[action="/register"] {
     width: 200px;
   }
 }
+
+.nav>li>a {
+  padding: initial;
+}
+
+.nav-pills>li.active>a {
+  color: initial;
+  background-color: initial;
+}
