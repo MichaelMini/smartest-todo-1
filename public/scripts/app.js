@@ -12,7 +12,7 @@ $(() => {
   $('#divNewNotifications li > a').click(function(){
     $('#text').text($(this).html());
   });
-
+  // search form verifier
   $("form[action='/search']").submit(function(e) {
     if ($.trim($("#search").val()) === "") {
       e.preventDefault();
