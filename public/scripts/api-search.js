@@ -38,6 +38,7 @@ $(function(){
 $(function(){
   $('[action="/save"]').on('submit', function(event) {
     event.preventDefault();
+    var savedTodo = {}
     var name = $('#search-item').text();
     var category = $("#text").text();
     var id = $('#idnum').text();
@@ -45,7 +46,23 @@ $(function(){
     var done_status = false;
     var apiSource = ''
 
-    console.log('From save: ', '| todo_item => ', name, '| todo_catagory => ', category, '| done_status => ', done_status, '| user_id => ', userId);
+    savedTodo.name = name;
+    savedTodo.category = category;
+    // savedTodo.id = id;
+    savedTodo.userId = userId;
+    savedTodo.done_status = done_status;
+    // savedTodo.apiSource = apiSource;
+
+    // console.log("From save", savedTodo);
+
+    // console.log('From save: ', '| todo_item => ', name, '| todo_catagory => ', category, '| done_status => ', done_status, '| user_id => ', userId);
+
+
+    $.post('/save', savedTodo).then(function(data) {
+
+
+    });
+
   })
 
 })
