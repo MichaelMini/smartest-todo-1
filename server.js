@@ -113,7 +113,7 @@ app.post("/register", (req, res) => {
     }
   })
   .then((results) => {
-    console.log("hopefully the new userid is in this: ", results);
+    // console.log("hopefully the new userid is in this: ", results);
     if (results.length !== 1) {
       console.log("what the hell is with this non-length-1 result: ", results);
       res.status(500).send("oh crap.  see server log.");
@@ -131,31 +131,51 @@ app.post("/register", (req, res) => {
   });
 });
 
-// app.post("/save", (req, res) => {
-//   console.log("results from save: ", req)
-// })
-// knex.select().from('users').where('user_name', 'michael').asCallback((error, results) => {
-//   if(results.length === 0) {
-//     knex('users')
-//     .insert({'user_name': user_name, 'password': password})
-//     .returning('id').asCallback((error, results) => {
-//       // user should be inserted by now
-//     })
-//   }
-// });
+
+//Save todo to database
+app.post("/save", (req, res) => {
+
+  let savedTodo = req.name;
+  let savedCategory = req.category;
+  let savedAPI = "Good Reads";
+  let doneStatus = false;
+  let userID = req.user_id;
+
+  console.log("test");
+
+  knex.select().from('todos').where('user_id', userID)
+  .then((res) => {
+    .insert( {'todo_item': savedTodo, 'todo_catagory': savedCategory, 'api_source': savedAPI, 'done_status': doneStatus, 'user_id': userID })
+    .returning('id');
+  })
+  .catch((err) => {
+    if (err) {
+      console.log(err);
+      res.status(500).send("oh crap.  see server log.");
+      return;
+    }
+  });
+
+
+});
+
+
+
+
+
 // Home page
 app.get("/", (req, res) => {
   if (req.user) {
     knex.select('user_name').from('users').where('id', req.user)
       .then((results) => {
-        console.log("hopefully the new userid is in this: ", results);
+        // console.log("hopefully the new userid is in this: ", results);
         if (results.length !== 1) {
           console.log("what the hell is with this non-length-1 result: ", results);
           res.status(500).send("oh crap.  see server log.");
             return;
         }
         // console.log(results[0].user_name);
-        console.log("I hate everything about you -- Ugly Kid Joe");
+        // console.log("I hate everything about you -- Ugly Kid Joe");
         let templateVar = {
           user_name: results[0].user_name,
           todo_items: [
@@ -220,7 +240,7 @@ app.post("/search", (req, res) => {
         id: todo_item_id,
         category: category
       };
-      console.log(outgoingResponse);
+      // console.log(outgoingResponse);
       res.json(outgoingResponse);
     })
     .catch(function(error){
