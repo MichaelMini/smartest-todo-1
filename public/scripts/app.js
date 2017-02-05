@@ -8,11 +8,12 @@ $(() => {
     }
   });;
 
-  // toggle options
+  // Toggle Options
   $('#divNewNotifications li > a').click(function(){
     $('#text').text($(this).html());
   });
-  // search form verifier
+
+  // Search Form Verifier
   $("form[action='/search']").submit(function(e) {
     if ($.trim($("#search").val()) === "") {
       e.preventDefault();
@@ -22,4 +23,12 @@ $(() => {
     $('#search-item').text($('#search').val());
   });
 
+  // To Disable Save Button By Default
+  $("button[action='/save']").attr('disabled','disabled');
+  // When User Fills Out Form Completely
+  $("form[action='/search']").keyup(function(){
+    if ($.trim($("#search").val())) {
+      $("button[action='/save']").removeAttr('disabled');
+    }
+  });
 });
