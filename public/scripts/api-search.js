@@ -2,7 +2,7 @@
 
 function insertEntryInTodoList($domTable, entry){
   var row = $("<tr>");
-  var firstCol = $("<td>").text(entry.id);
+  var firstCol = $("<td>")//.text(entry.id);
   var secondCol = $("<td>").text(entry.name);
   var sourceCol = $("<td>").text(entry.source);
   var thirdCol = $("<td>").text(entry.category);
