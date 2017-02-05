@@ -9,6 +9,7 @@ function insertEntryInTodoList($domTable, entry){
   $domTable.append(row);
   $('#search-item').text($("#search").val());
   $('#text').text(entry.category);
+  $('#idnum').text(entry.id);
 
 }
 
@@ -31,4 +32,16 @@ $(function(){
     //        -- including a .catch for exceptions
     //        -- including the possiblity that the backend says "fuck no"
   })
+})
+
+$(function(){
+  $('[action="/save"]').on('submit', function(event) {
+    event.preventDefault();
+    var name = $("#search").val();
+    var category = $("#text").val();
+    var id = $('#idnum').val();
+
+    console.log('from save: ', name, category, id);
+  })
+
 })

@@ -131,6 +131,9 @@ app.post("/register", (req, res) => {
   });
 });
 
+// app.post("/save", (req, res) => {
+//   console.log("results from save: ", req)
+// })
 // knex.select().from('users').where('user_name', 'michael').asCallback((error, results) => {
 //   if(results.length === 0) {
 //     knex('users')
@@ -156,9 +159,9 @@ app.get("/", (req, res) => {
         let templateVar = {
           user_name: results[0].user_name,
           todo_items: [
-            { todo_item_id: 22, name: "be awesome", category: "Life Goal" },
-            { todo_item_id: 26, name: "breath", category: "Product" },
-            { todo_item_id: 32, name: "rawk", category: "Music" },
+            { todo_item_id: 22, name: "*be awesome", category: "Life Goal" },
+            { todo_item_id: 26, name: "*breath", category: "Product" },
+            { todo_item_id: 32, name: "*rawk", category: "Music" },
           ]
         };
         res.render("index", templateVar);
