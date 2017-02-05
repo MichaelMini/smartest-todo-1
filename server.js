@@ -252,7 +252,7 @@ app.post("/search", (req, res) => {
         goodReadsResponse = apiResponses[0];
       }
 
-      let todo_item_id = Math.floor(Math.random() * 60) + 10;
+      // let todo_item_id = Math.floor(Math.random() * 60) + 10;
       // let cataOptions = Math.floor((Math.random() * 4) + 1);
       // let category = "";
       // switch (cataOptions) {
@@ -269,28 +269,71 @@ app.post("/search", (req, res) => {
       //         category = "Products";
       // }
 
-      let category = goodReadsResponse.v.category;
+      let todoCategory = goodReadsResponse.v.category;
 
-      if ((goodReadsResponse.v.category !== "Movie/TV Series" || goodReadsResponse.v.category !== "Book") && YelpProvider.search(term)) {
-        category = "Restaurant";
-      }
+      if ((todoCategory !== "Movie/TV Series") && (todoCategory !== "Book")) {
+
+        YelpProvider.search(term).then(function(yelpResult) {
 
 
-      var name = goodReadsResponse.v.title;
-      var source = goodReadsResponse.v.source;
-      var author = goodReadsResponse.v.author;
-      // goodReadsResponse.v.title
+          if (yelpResult.title.toLowerCase().includes(term.toLowerCase())) {
 
-      let outgoingResponse = {
-        name: name,
-        category: category,
-        source: source
-      };
+            todoCategory = yelpResult.category;
+            name = yelpResult.title;
+            source = yelpResult.source;
 
-      console.log('goodReadsResponse: ', goodReadsResponse);
+            let outgoingResponse = {
+              name: name,
+              category: todoCategory,
+              source: source,
+              todo: term
+            };
 
-      res.json(outgoingResponse);
-    })
+            res.json(outgoingResponse);
+
+
+          } else {
+
+            let todoCategory = goodReadsResponse.v.category;
+            var name = goodReadsResponse.v.title;
+            var source = goodReadsResponse.v.source;
+            var author = goodReadsResponse.v.author;
+            // goodReadsResponse.v.title
+
+            let outgoingResponse = {
+              name: name,
+              category: todoCategory,
+              source: source,
+              todo: term
+            };
+
+            console.log('goodReadsResponse: ', goodReadsResponse);
+
+            res.json(outgoingResponse);
+         }
+       })
+     } else {
+
+            let todoCategory = goodReadsResponse.v.category;
+            var name = goodReadsResponse.v.title;
+            var source = goodReadsResponse.v.source;
+            var author = goodReadsResponse.v.author;
+            // goodReadsResponse.v.title
+
+            let outgoingResponse = {
+              name: name,
+              category: todoCategory,
+              source: source,
+              todo: term
+            };
+
+            console.log('goodReadsResponse: ', goodReadsResponse);
+
+            res.json(outgoingResponse);
+         }
+
+
+   })
     .catch(function(error){
       console.log("I thought we reflected until this stopped happening?", error);
       res.json({

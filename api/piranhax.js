@@ -18,18 +18,20 @@ module.exports = {
         // results.get("Item[0].ItemLinks.ItemLink.Description")
 
         // get first item ASIN
-        // console.log(results.get("Item[0].ItemAttributes.ProductGroup"));
-        // console.log(results.get("Item[0].ItemAttributes.Actor"));
+        // console.log("Results from Amazon", results.get("Item[0].ItemAttributes"));
+        // console.log("Actors from Amazon", results.get("Item[0].ItemAttributes.Actor"));
         let title = results.get("Item[0].ItemAttributes.Title");
         let movie = results.get("Item[0].ItemAttributes.Actor");
         let product = results.get("Item[0].ItemAttributes.ProductGroup");
-        let category = "";
+        let category;
         // let manufacturer = results.get("Item[0].ItemAttributes.Manufacturer");
 
-        if (movie) {
-          category = "Movie/TV Series"
-        } else if (product === "Book") {
-          category = "Book"
+        if (movie && title.toLowerCase().includes(term.toLowerCase())) {
+          category = "Movie/TV Series";
+        } else if (product === "Book" && title.toLowerCase().includes(term.toLowerCase())) {
+          category = "Book";
+        } else {
+          category = "Product";
         }
 
         let amazonResult = {
