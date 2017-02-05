@@ -269,13 +269,17 @@ app.post("/search", (req, res) => {
       //         category = "Products";
       // }
 
+      //Category as determined by Amazon
       let todoCategory = goodReadsResponse.v.category;
 
+      //Compare against Yelp for todo items that are neither movies or books
       if ((todoCategory !== "Movie/TV Series") && (todoCategory !== "Book")) {
+
+        //Query Yelp through their API
 
         YelpProvider.search(term).then(function(yelpResult) {
 
-
+          //Send Yelp results if todo item matches a restaurant
           if (yelpResult.title.toLowerCase().includes(term.toLowerCase())) {
 
             todoCategory = yelpResult.category;
@@ -294,6 +298,7 @@ app.post("/search", (req, res) => {
 
           } else {
 
+            //Send Amazon "product" results if Yelp is null
             let todoCategory = goodReadsResponse.v.category;
             var name = goodReadsResponse.v.title;
             var source = goodReadsResponse.v.source;
@@ -313,25 +318,24 @@ app.post("/search", (req, res) => {
          }
        })
      } else {
+        //Send Amazon "movie" or "book" results if above conditions not met
+        let todoCategory = goodReadsResponse.v.category;
+        var name = goodReadsResponse.v.title;
+        var source = goodReadsResponse.v.source;
+        var author = goodReadsResponse.v.author;
+        // goodReadsResponse.v.title
 
-            let todoCategory = goodReadsResponse.v.category;
-            var name = goodReadsResponse.v.title;
-            var source = goodReadsResponse.v.source;
-            var author = goodReadsResponse.v.author;
-            // goodReadsResponse.v.title
+        let outgoingResponse = {
+          name: name,
+          category: todoCategory,
+          source: source,
+          todo: term
+        };
 
-            let outgoingResponse = {
-              name: name,
-              category: todoCategory,
-              source: source,
-              todo: term
-            };
+        console.log('goodReadsResponse: ', goodReadsResponse);
 
-            console.log('goodReadsResponse: ', goodReadsResponse);
-
-            res.json(outgoingResponse);
-         }
-
+        res.json(outgoingResponse);
+     }
 
    })
     .catch(function(error){
