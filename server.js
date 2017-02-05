@@ -131,6 +131,30 @@ app.post("/register", (req, res) => {
   });
 });
 
+//Editing profile
+app.put("/profile", (req, res) => {
+  const newName = req.body.name;
+  const newPassword = req.body.password;
+
+    //If any fields are empty, send error
+    if (!req.body.name || !req.body.password) {
+      res.status(400).send("All fields must be filled.");
+      return;
+    } else {
+
+      //Otherwise, change user account info
+      knex.select().from('users')
+      .where('id', req.session.user_id)
+      .update({'user_name': newName, 'password': newPassword})
+
+      res.redirect('/');
+
+    }
+
+});
+
+
+
 
 //Save todo to database
 app.post("/save", (req, res) => {
