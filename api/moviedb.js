@@ -12,7 +12,7 @@ module.exports = {
           title: data.results[0].title,
           release_date: data.results[0].release_date
         }
-        console.log(moviedbResults);
+        console.log('moviedbResults: ', moviedbResults);
         resolve(moviedbResults);
       });
     })

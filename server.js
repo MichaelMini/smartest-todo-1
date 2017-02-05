@@ -183,16 +183,16 @@ app.post("/search", (req, res) => {
 
     var allData = Promise.all([
 
-      GoodreadsProvider.search(term),
-      YelpProvider.search(term),
-      MovieDBProvider.search(term),
+      // GoodreadsProvider.search(term),
+      // YelpProvider.search(term),
+      // MovieDBProvider.search(term),
       PiranhaxProvider.search(term)
     ].map(reflect))//.then(console.log('from app.post in Server:', data))
     // .then(data => res.send(data));
     .then(function(apiResponses){
 
       let goodReadsResponse;
-      console.log(apiResponses);
+      console.log('apiResponses:', apiResponses);
       if (apiResponses[0].e) {
         goodReadsResponse = { }; // dummy data to deal with error in API call
       } else {
@@ -220,7 +220,7 @@ app.post("/search", (req, res) => {
         id: todo_item_id,
         category: category
       };
-      console.log(outgoingResponse);
+      // console.log('outgoingResponse:', outgoingResponse);
       res.json(outgoingResponse);
     })
     .catch(function(error){

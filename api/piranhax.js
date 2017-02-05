@@ -20,11 +20,11 @@ module.exports = {
         // get first item ASIN
         console.log(results.get("Item[0].ItemAttributes"));
         let title = results.get("Item[0].ItemAttributes.Title");
-        let manufacturer = results.get("Item[0].ItemAttributes.Manufacturer");
+        // let manufacturer = results.get("Item[0].ItemAttributes.Manufacturer");
 
         let amazonResult = {
-          title,
-          manufacturer
+          title
+          // manufacturer
         }
 
         resolve(amazonResult);
