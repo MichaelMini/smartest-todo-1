@@ -133,34 +133,28 @@ app.post("/register", (req, res) => {
 
 
 //Save todo to database
-app.post("/save", (req, res) => {
+// app.post("/save", (req, res) => {
 
-  console.log(req);
+//   let savedTodo = req.name;
+//   let savedCategory = req.category;
+//   let savedAPI = "Good Reads";
+//   let doneStatus = false;
+//   let userID = req.user_id;
 
-  // let savedTodo = req.name;
-  // let savedCategory = req.category;
-  // let savedAPI = "Good Reads";
-  // let doneStatus = false;
-  // let userID = req.user_id;
+//   console.log("test");
 
-  // console.log("test");
-
-  // knex.select().from('todos').where('user_id', userID)
-  // .then((res) => {
-  //   .insert( {'todo_item': savedTodo, 'todo_catagory': savedCategory, 'api_source': savedAPI, 'done_status': doneStatus, 'user_id': userID })
-  //   .returning('id');
-  // })
-  // .catch((err) => {
-  //   if (err) {
-  //     console.log(err);
-  //     res.status(500).send("oh crap.  see server log.");
-  //     return;
-  //   }
-  // });
-
-
-});
-
+//   knex.select().from('todos').where('user_id', userID)
+//   .then((res) => {
+//     .insert( {'todo_item': savedTodo, 'todo_catagory': savedCategory, 'api_source': savedAPI, 'done_status': doneStatus, 'user_id': userID })
+//     .returning('id');
+//   })
+//   .catch((err) => {
+//     if (err) {
+//       console.log(err);
+//       res.status(500).send("oh crap.  see server log.");
+//       return;
+//     }
+//   });
 
 
 
@@ -184,9 +178,9 @@ app.get("/", (req, res) => {
           user_name: results[0].user_name,
           user_id: req.user,
           todo_items: [
-            { todo_item_id: 22, name: "*be awesome", category: "Life Goal" },
-            { todo_item_id: 26, name: "*breath", category: "Product" },
-            { todo_item_id: 32, name: "*rawk", category: "Music" },
+            // { todo_item_id: 22, name: "*be awesome", category: "Life Goal" },
+            // { todo_item_id: 26, name: "*breath", category: "Product" },
+            // { todo_item_id: 32, name: "*rawk", category: "Music" },
           ]
         };
         res.render("index", templateVar);
@@ -240,11 +234,17 @@ app.post("/search", (req, res) => {
           case 4:
               category = "Products";
       }
+      var name = goodReadsResponse.v.title;
+      var source = goodReadsResponse.v.source;
+      var author = goodReadsResponse.v.author;
+      // goodReadsResponse.v.title
+
       let outgoingResponse = {
-        name: term,
-        id: todo_item_id,
-        category: category
+        name: name,
+        category: category,
+        source: source
       };
+      console.log('goodReadsResponse: ', goodReadsResponse)
       console.log('outgoingResponse: ',outgoingResponse);
       res.json(outgoingResponse);
     })
