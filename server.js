@@ -254,20 +254,22 @@ app.post("/search", (req, res) => {
 
       let todo_item_id = Math.floor(Math.random() * 60) + 10;
       let cataOptions = Math.floor((Math.random() * 4) + 1);
-      let category = "";
-      switch (cataOptions) {
-          case 1:
-              category = "Books";
-              break;
-          case 2:
-              category = "Food";
-              break;
-          case 3:
-              category = "Movies";
-              break;
-          case 4:
-              category = "Products";
-      }
+      // let category = "";
+      // switch (cataOptions) {
+      //     case 1:
+      //         category = "Books";
+      //         break;
+      //     case 2:
+      //         category = "Food";
+      //         break;
+      //     case 3:
+      //         category = "Movies";
+      //         break;
+      //     case 4:
+      //         category = "Products";
+      // }
+
+      let category = goodReadsResponse.v.category;
       var name = goodReadsResponse.v.title;
       var source = goodReadsResponse.v.source;
       var author = goodReadsResponse.v.author;

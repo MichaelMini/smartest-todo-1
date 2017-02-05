@@ -18,13 +18,29 @@ module.exports = {
         // results.get("Item[0].ItemLinks.ItemLink.Description")
 
         // get first item ASIN
-        console.log(results.get("Item[0].ItemAttributes"));
+        // console.log(results.get("Item[0].ItemAttributes.ProductGroup"));
+        // console.log(results.get("Item[0].ItemAttributes.Actor"));
         let title = results.get("Item[0].ItemAttributes.Title");
+        let movie = results.get("Item[0].ItemAttributes.Actor");
+        let product = results.get("Item[0].ItemAttributes.ProductGroup");
+        let category = "";
         // let manufacturer = results.get("Item[0].ItemAttributes.Manufacturer");
+
+        if (movie) {
+          category = "Movie/TV Series"
+        } else if (product === "Book") {
+          category = "Book"
+        } else if (product) {
+          category = "Product"
+        } else {
+          category = "Restaurant"
+        }
+
 
         let amazonResult = {
           title,
-          source: "Amazon"
+          source: "Amazon",
+          category
         }
 
         resolve(amazonResult);
