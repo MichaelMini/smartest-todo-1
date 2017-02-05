@@ -144,6 +144,10 @@ app.post("/save", (req, res) => {
 
   knex.select().table('todos')
     .insert( {'todo_item': savedTodo, 'todo_catagory': savedCategory, 'api_source': apiSource, 'done_status': doneStatus, 'user_id': userId })
+    .then(function(){
+      console.log('Successfully Inserted')
+      res.redirect('/');
+    })
     .catch((err) => {
       if (err) {
         console.log(err);
@@ -151,7 +155,6 @@ app.post("/save", (req, res) => {
         return;
       }
   });
-
 });
 
 
@@ -170,9 +173,14 @@ app.get("/", (req, res) => {
           res.status(500).send("oh crap.  see server log.");
             return;
         }
+        var user_name = results;
         var realTodo_array = [];
         knex.select().from('todos').where('user_id', req.user).then(function(results){
-
+          if(undefined){
+          console.log("Shit user_id is undefined: ", results);
+          res.status(500).send("results undefined for user_id!!");
+            return;
+          }else
           results.forEach(function(todoRow){
               var realTodo_items = {};
               var name = todoRow.todo_item;
@@ -189,7 +197,8 @@ app.get("/", (req, res) => {
                   // console.log(results[0].user_name);
         // console.log("I hate everything about you -- Ugly Kid Joe");
           let templateVar = {
-            user_name: results[0].user_name,
+            //todo fix this so that a name will show in the username field on index.ejs nav
+            user_name: user_name,
             user_id: req.user,
             // todo_items: [
             //   // { todo_item_id: 22, name: "*be awesome", category: "Life Goal" },
@@ -204,26 +213,6 @@ app.get("/", (req, res) => {
 
           res.render("index", templateVar);
         })
-
-
-
-        // // console.log(results[0].user_name);
-        // // console.log("I hate everything about you -- Ugly Kid Joe");
-        // let templateVar = {
-        //   user_name: results[0].user_name,
-        //   user_id: req.user,
-        //   // todo_items: [
-        //   //   // { todo_item_id: 22, name: "*be awesome", category: "Life Goal" },
-        //   //   // { todo_item_id: 26, name: "*breath", category: "Product" },
-        //   //   // { todo_item_id: 32, name: "*rawk", category: "Music" }
-
-        //   // ]
-        //   todo_items: realTodo_array
-        // };
-        // console.log('realTodo_array=>\n', realTodo_array)
-        // //TODO display all content from todos table for a user
-
-        // res.render("index", templateVar);
       }
     );
   } else {
