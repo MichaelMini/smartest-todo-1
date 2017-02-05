@@ -133,32 +133,26 @@ app.post("/register", (req, res) => {
 
 
 //Save todo to database
-// app.post("/save", (req, res) => {
+app.post("/save", (req, res) => {
 
-//   let savedTodo = req.name;
-//   let savedCategory = req.category;
-//   let savedAPI = "Good Reads";
-//   let doneStatus = false;
-//   let userID = req.user_id;
-
-//   console.log("test");
-
-//   knex.select().from('todos').where('user_id', userID)
-//   .then((res) => {
-//     .insert( {'todo_item': savedTodo, 'todo_catagory': savedCategory, 'api_source': savedAPI, 'done_status': doneStatus, 'user_id': userID })
-//     .returning('id');
-//   })
-//   .catch((err) => {
-//     if (err) {
-//       console.log(err);
-//       res.status(500).send("oh crap.  see server log.");
-//       return;
-//     }
-//   });
+  let savedTodo = req.body.name;
+  let savedCategory = req.body.category;
+  let apiSource = req.body.apiSource;
+  let doneStatus = req.body.done_status;
+  let userId = req.body.userId;
 
 
-// });
+  knex.select().table('todos')
+    .insert( {'todo_item': savedTodo, 'todo_catagory': savedCategory, 'api_source': apiSource, 'done_status': doneStatus, 'user_id': userId })
+    .catch((err) => {
+      if (err) {
+        console.log(err);
+        res.status(500).send("Sorry, there was an error");
+        return;
+      }
+  });
 
+});
 
 
 

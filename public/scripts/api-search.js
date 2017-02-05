@@ -61,13 +61,28 @@ $(function(){
 $(function(){
   $('[action="/save"]').on('submit', function(event) {
     event.preventDefault();
-    var name = $('.api-name').text();
+
+    var savedTodo = {}
+
+    var name = $('#search-item').text();
     var category = $('#text').text();
     var userId = $('#user-id').text();
     var done_status = false;
     var apiSource = $('.api-source').text();
 
+
+    savedTodo.name = name;
+    savedTodo.category = category;
+    savedTodo.userId = userId;
+    savedTodo.done_status = done_status;
+    savedTodo.apiSource = apiSource;
+
+    $.post('/save', savedTodo).then(function(data) {
+
+    });
+
     console.log('From save: ', '| todo_item => ', name, '| todo_catagory => ', category, '| api-source => ', apiSource, '| done_status => ', done_status, '| user_id => ', userId);
+
   })
 
 })
