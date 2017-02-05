@@ -28,15 +28,15 @@ function insertEntryInTodoList($domTable, entry){
  //  row.append(secondCol).append(sourceCol);
  //  $domTable.prepend(row);
 console.log(entry);
-  $('#search-item').text(entry.name);
-  $('#text').text(entry.category);
-  $('.api-source').text(entry.source);
-  $('#idnum').text(entry.id);
+  // $('#search-item').text(entry.name);
+  // $('#text').text(entry.category);
+  // $('.api-source').text(entry.source);
+  // $('#idnum').text(entry.id);
 
 }
 
 $(function(){
-  $(".save-button").hide()
+  // $(".save-button").hide()
 
   var $todo_entry_table = $('table.todo_entries');
   $('[action="/search"]').on('submit', function(event) {
@@ -84,7 +84,14 @@ $(function(){
 
     console.log('From save: ', '| todo_item => ', name, '| todo_catagory => ', category, '| api-source => ', apiSource, '| done_status => ', done_status, '| user_id => ', userId);
 
-    location.reload();
+    let $tr = $('<tr>')
+      .append($('<td>').addClass('category'))
+      .append($('<td>').addClass('search-item'))
+      .appendTo($('tbody'));
+
+    $tr.find('.category').text(category);
+    $tr.find('.search-item').text(name);
+
   })
 
 })

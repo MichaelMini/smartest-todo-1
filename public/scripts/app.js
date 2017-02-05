@@ -6,7 +6,7 @@ $(() => {
     for(user of users) {
       $("<div>").text(user.name).appendTo($("body"));
     }
-  });;
+  });
 
   // Toggle Options
   $('#divNewNotifications li > a').click(function(){
