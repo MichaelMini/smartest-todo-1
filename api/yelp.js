@@ -25,7 +25,8 @@ module.exports = {
         // console.log(data.businesses[0].name);
         // console.log(data.businesses[0].phone);
         let yelpResult = {
-          name: data.businesses[0].name
+          title: data.businesses[0].name,
+          source: "yelp"
           // phone: data.businesses[0].phone
         }
         console.log('yelpResult: ', yelpResult)

@@ -36,6 +36,7 @@ function insertEntryInTodoList($domTable, entry){
 
 $(function(){
   $(".save-button").hide()
+
   var $todo_entry_table = $('table.todo_entries');
   $('[action="/search"]').on('submit', function(event) {
     // TODO: blank the search bar
@@ -60,7 +61,7 @@ $(function(){
 
 $(function(){
   $('[action="/save"]').on('submit', function(event) {
-    // event.preventDefault();
+    event.preventDefault();
 
     var savedTodo = {}
 

@@ -10,7 +10,8 @@ module.exports = {
         if(err) { return reject(err); }
         let moviedbResults = {
           title: data.results[0].title,
-          release_date: data.results[0].release_date
+          source: "The Movie DB"
+          // release_date: data.results[0].release_date
         }
         console.log('moviedbResults: ', moviedbResults);
         resolve(moviedbResults);

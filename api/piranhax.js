@@ -23,8 +23,8 @@ module.exports = {
         // let manufacturer = results.get("Item[0].ItemAttributes.Manufacturer");
 
         let amazonResult = {
-          title
-          // manufacturer
+          title,
+          source: "Amazon"
         }
 
         resolve(amazonResult);

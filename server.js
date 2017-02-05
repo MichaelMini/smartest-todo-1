@@ -141,12 +141,12 @@ app.post("/save", (req, res) => {
   let doneStatus = req.body.done_status;
   let userId = req.body.userId;
 
-
+  console.log('Successfully Inserted before knex!')
   knex.select().table('todos')
     .insert( {'todo_item': savedTodo, 'todo_catagory': savedCategory, 'api_source': apiSource, 'done_status': doneStatus, 'user_id': userId })
     .then(function(){
       console.log('Successfully Inserted')
-      res.redirect('/');
+      // res.redirect('/');
     })
     .catch((err) => {
       if (err) {
