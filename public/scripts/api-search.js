@@ -80,11 +80,11 @@ $(function(){
     savedTodo.apiSource = apiSource;
 
     $.post('/save', savedTodo).then(function(data) {
-
     });
 
     console.log('From save: ', '| todo_item => ', name, '| todo_catagory => ', category, '| api-source => ', apiSource, '| done_status => ', done_status, '| user_id => ', userId);
 
+    location.reload();
   })
 
 })
