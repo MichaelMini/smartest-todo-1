@@ -30,12 +30,7 @@ module.exports = {
           category = "Movie/TV Series"
         } else if (product === "Book") {
           category = "Book"
-        } else if (product) {
-          category = "Product"
-        } else {
-          category = "Restaurant"
         }
-
 
         let amazonResult = {
           title,

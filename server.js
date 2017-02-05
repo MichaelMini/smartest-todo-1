@@ -253,7 +253,7 @@ app.post("/search", (req, res) => {
       }
 
       let todo_item_id = Math.floor(Math.random() * 60) + 10;
-      let cataOptions = Math.floor((Math.random() * 4) + 1);
+      // let cataOptions = Math.floor((Math.random() * 4) + 1);
       // let category = "";
       // switch (cataOptions) {
       //     case 1:
@@ -270,6 +270,12 @@ app.post("/search", (req, res) => {
       // }
 
       let category = goodReadsResponse.v.category;
+
+      if ((goodReadsResponse.v.category !== "Movie/TV Series" || goodReadsResponse.v.category !== "Book") && YelpProvider.search(term)) {
+        category = "Restaurant";
+      }
+
+
       var name = goodReadsResponse.v.title;
       var source = goodReadsResponse.v.source;
       var author = goodReadsResponse.v.author;
