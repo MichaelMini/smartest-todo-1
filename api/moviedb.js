@@ -5,10 +5,15 @@ module.exports = {
   {
     return new Promise((resolve, reject) => {
       let query = {"query": term};
-      console.log(query);
+
       MovieDB.searchMovie(query, (err, data) => {
         if(err) { return reject(err); }
-        resolve(data);
+        let moviedbResults = {
+          title: data.results[0].title,
+          release_date: data.results[0].release_date
+        }
+        console.log(moviedbResults);
+        resolve(moviedbResults);
       });
     })
   }

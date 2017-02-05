@@ -1,10 +1,10 @@
 const Yelp = require('yelp');
-const keys = process.env;
+
 const yelp = new Yelp({
-  consumer_key: keys.consumer_key,
-  consumer_secret: keys.consumer_secret,
-  token: keys.token,
-  token_secret: keys.token_secret,
+  consumer_key: process.env.consumer_key,
+  consumer_secret: process.env.consumer_secret,
+  token: process.env.token,
+  token_secret: process.env.token_secret
 });
 
 module.exports = {
@@ -14,7 +14,14 @@ module.exports = {
       let query = { term: term, location: 'Vancouver' }
       yelp.search(query, (err, data) => {
         if(err) { return reject(err); }
-        resolve(data);
+        // console.log(data);
+        // console.log(data.businesses[0].name);
+        // console.log(data.businesses[0].phone);
+        let yelpResult = {
+          name: data.businesses[0].name,
+          phone: data.businesses[0].phone
+        }
+        resolve(yelpResult);
       });
     })
   }

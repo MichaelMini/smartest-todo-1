@@ -14,14 +14,15 @@ module.exports = {
       });
 
       client.itemSearch(query)
+        
         .then(function(results){
 
-          console.log('amazon:',results[0].ItemAttributes.length);
-          console.log();
+          console.log('amazon:',results[0].ItemAttributes);
+
         })
         .catch(function(err){
-          // console.log(err.error.object);
-          // console.log(err);
+          console.log(err.error.object);
+          console.log(err);
         });
       });
     }
