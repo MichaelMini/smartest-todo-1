@@ -9,7 +9,8 @@ module.exports = {
         if(err || !data) { return reject(err); }
         let something = {
           title: data.title,
-          author: data.author
+          author: data.author,
+          source: "Good Reads"
         }
 
         resolve(something);

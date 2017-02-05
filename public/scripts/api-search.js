@@ -4,8 +4,9 @@ function insertEntryInTodoList($domTable, entry){
   var row = $("<tr>");
   var firstCol = $("<td>").text(entry.id);
   var secondCol = $("<td>").text(entry.name);
+  var sourceCol = $("<td>").text(entry.source);
   var thirdCol = $("<td>").text(entry.category);
-  row.append(firstCol).append(secondCol).append(thirdCol);
+  row.append(firstCol).append(secondCol).append(thirdCol).append(sourceCol);
   $domTable.append(row);
   $('#search-item').text($("#search").val());
   $('#text').text(entry.category);
@@ -41,8 +42,10 @@ $(function(){
     var category = $("#text").text();
     var id = $('#idnum').text();
     var userId = $('#user-id').text();
+    var done_status = false;
+    var apiSource = ''
 
-    console.log('from save: ', name, category, id, userId);
+    console.log('From save: ', '| todo_item => ', name, '| todo_catagory => ', category, '| done_status => ', done_status, '| user_id => ', userId);
   })
 
 })
