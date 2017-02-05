@@ -14,7 +14,31 @@ form[action="/register"] {
   padding: initial;
 }
 
+button[action="/save"],
 .nav-pills>li.active>a {
   color: initial;
   background-color: initial;
+  -webkit-transition: all .3s ease-out;
+  -moz-transition: all .3s ease-out;
+  -o-transition: all .3s ease-out;
+  transition: all .3s ease-out;
+  padding: 0 1em;
+}
+
+button[action="/save"]:hover,
+.nav-pills > li.active > a:hover {
+  color: white;
+  background-color: #666;
+}
+
+#search-item + th {
+  display: flex;
+  align-items: flex-end;
+  .btn-default {
+    // background-color: initial;
+    padding: 0 1em;
+  }
+  ul {
+    width: 0;
+  }
 }
