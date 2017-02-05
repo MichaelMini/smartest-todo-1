@@ -37,11 +37,12 @@ $(function(){
 $(function(){
   $('[action="/save"]').on('submit', function(event) {
     event.preventDefault();
-    var name = $("#search").val();
-    var category = $("#text").val();
-    var id = $('#idnum').val();
+    var name = $('#search-item').text();
+    var category = $("#text").text();
+    var id = $('#idnum').text();
+    var userId = $('#user-id').text();
 
-    console.log('from save: ', name, category, id);
+    console.log('from save: ', name, category, id, userId);
   })
 
 })

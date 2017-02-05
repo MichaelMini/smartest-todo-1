@@ -1,9 +1,11 @@
 <nav class="navbar navbar-default navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header navbar-right">
-      <a class="navbar-brand" href="#">
-        This is <%= user_name %>'s Smartest Todo List!
+      This is
+      <a class="navbar-brand" id="user-id" href="#">
+        <%= user_name %>
       </a>
+      Smartest Todo List
       <form action="/logout" method="POST" class="navbar-form navbar-right" role="search">
         <div class="form-group">
         </div>
