@@ -131,6 +131,30 @@ app.post("/register", (req, res) => {
   });
 });
 
+//Editing profile
+app.put("/profile", (req, res) => {
+  const newName = req.body.name;
+  const newPassword = req.body.password;
+
+    //If any fields are empty, send error
+    if (!req.body.name || !req.body.password) {
+      res.status(400).send("All fields must be filled.");
+      return;
+    } else {
+
+      //Otherwise, change user account info
+      knex.select().from('users')
+      .where('id', req.session.user_id)
+      .update({'user_name': newName, 'password': newPassword})
+
+      res.redirect('/');
+
+    }
+
+});
+
+
+
 
 //Save todo to database
 app.post("/save", (req, res) => {
@@ -252,37 +276,92 @@ app.post("/search", (req, res) => {
         goodReadsResponse = apiResponses[0];
       }
 
-      let todo_item_id = Math.floor(Math.random() * 60) + 10;
-      let cataOptions = Math.floor((Math.random() * 4) + 1);
-      let category = "";
-      switch (cataOptions) {
-          case 1:
-              category = "Books";
-              break;
-          case 2:
-              category = "Food";
-              break;
-          case 3:
-              category = "Movies";
-              break;
-          case 4:
-              category = "Products";
-      }
-      var name = goodReadsResponse.v.title;
-      var source = goodReadsResponse.v.source;
-      var author = goodReadsResponse.v.author;
-      // goodReadsResponse.v.title
+      // let todo_item_id = Math.floor(Math.random() * 60) + 10;
+      // let cataOptions = Math.floor((Math.random() * 4) + 1);
+      // let category = "";
+      // switch (cataOptions) {
+      //     case 1:
+      //         category = "Books";
+      //         break;
+      //     case 2:
+      //         category = "Food";
+      //         break;
+      //     case 3:
+      //         category = "Movies";
+      //         break;
+      //     case 4:
+      //         category = "Products";
+      // }
 
-      let outgoingResponse = {
-        name: name,
-        category: category,
-        source: source
-      };
+      //Category as determined by Amazon
+      let todoCategory = goodReadsResponse.v.category;
 
-      console.log('goodReadsResponse: ', goodReadsResponse);
+      //Compare against Yelp for todo items that are neither movies or books
+      if ((todoCategory !== "Movie/TV Series") && (todoCategory !== "Book")) {
 
-      res.json(outgoingResponse);
-    })
+        //Query Yelp through their API
+
+        YelpProvider.search(term).then(function(yelpResult) {
+
+          //Send Yelp results if todo item matches a restaurant
+          if (yelpResult.title.toLowerCase().includes(term.toLowerCase())) {
+
+            todoCategory = yelpResult.category;
+            name = yelpResult.title;
+            source = yelpResult.source;
+
+            let outgoingResponse = {
+              name: name,
+              category: todoCategory,
+              source: source,
+              todo: term
+            };
+
+            res.json(outgoingResponse);
+
+
+          } else {
+
+            //Send Amazon "product" results if Yelp is null
+            let todoCategory = goodReadsResponse.v.category;
+            var name = goodReadsResponse.v.title;
+            var source = goodReadsResponse.v.source;
+            var author = goodReadsResponse.v.author;
+            // goodReadsResponse.v.title
+
+            let outgoingResponse = {
+              name: name,
+              category: todoCategory,
+              source: source,
+              todo: term
+            };
+
+            console.log('goodReadsResponse: ', goodReadsResponse);
+
+            res.json(outgoingResponse);
+         }
+       })
+     } else {
+        //Send Amazon "movie" or "book" results if above conditions not met
+        let todoCategory = goodReadsResponse.v.category;
+        var name = goodReadsResponse.v.title;
+        var source = goodReadsResponse.v.source;
+        var author = goodReadsResponse.v.author;
+        // goodReadsResponse.v.title
+
+        let outgoingResponse = {
+          name: name,
+          category: todoCategory,
+          source: source,
+          todo: term
+        };
+
+        console.log('goodReadsResponse: ', goodReadsResponse);
+
+        res.json(outgoingResponse);
+     }
+
+   })
     .catch(function(error){
       console.log("I thought we reflected until this stopped happening?", error);
       res.json({

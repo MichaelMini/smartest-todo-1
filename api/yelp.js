@@ -17,16 +17,26 @@ module.exports = {
     return new Promise((resolve, reject) => {
       let query = {
         term: term,
-        location: 'Vancouver'
+        location: 'Vancouver',
+        category_filter: 'restaurants',
+        sort: 0
       }
       yelp.search(query, (err, data) => {
         if(err) { return reject(err); }
         // console.log(data);
         // console.log(data.businesses[0].name);
         // console.log(data.businesses[0].phone);
+        let title = data.businesses[0].name;
+        let category;
+
+        if (title.includes(term)) {
+          category = "Restaurant";
+        }
+
         let yelpResult = {
           title: data.businesses[0].name,
-          source: "yelp"
+          source: "Yelp",
+          category: "Restaurant"
           // phone: data.businesses[0].phone
         }
         console.log('yelpResult: ', yelpResult)

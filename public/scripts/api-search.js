@@ -28,11 +28,11 @@ function insertEntryInTodoList($domTable, entry){
  //  row.append(secondCol).append(sourceCol);
  //  $domTable.prepend(row);
 console.log(entry);
-  // $('#search-item').text(entry.name);
-  // $('#text').text(entry.category);
-  // $('.api-source').text(entry.source);
-  // $('#idnum').text(entry.id);
-
+  $('#todo-item').text(entry.todo);
+  $('#search-item').text(entry.name);
+  $('#text').text(entry.category);
+  $('.api-source').text(entry.source);
+  $('#idnum').text(entry.id);
 }
 
 $(function(){
