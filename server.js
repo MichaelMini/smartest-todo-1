@@ -173,7 +173,7 @@ app.get("/", (req, res) => {
           res.status(500).send("oh crap.  see server log.");
             return;
         }
-        var user_name = results;
+        var user_name = results[0].user_name;
         var realTodo_array = [];
         knex.select().from('todos').where('user_id', req.user).then(function(results){
           if(undefined){

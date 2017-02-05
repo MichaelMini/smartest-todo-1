@@ -1,17 +1,16 @@
 <nav class="navbar navbar-default navbar-inverse">
   <div class="container-fluid">
+  <h5 class="navbar-left">This is Smartest Todo List</h5>
     <div class="navbar-header navbar-right">
-      This is
-      <a class="navbar-brand" href="#">
-        <%= user_name %>
-      </a>
-      <i id="user-id"><%= user_id %></i>
-      Smartest Todo List
-      <form action="/logout" method="POST" class="navbar-form navbar-right" role="search">
+    <form action="/logout" method="POST" class="navbar-form navbar-right" role="search">
         <div class="form-group">
+          <button type="submit" class="btn btn-default">Logout</button>
         </div>
-        <button type="submit" class="btn btn-default">Login</button>
       </form>
+      <h1 class="navbar-brand navbar-right" href="#">
+        What would you like  <%= user_name %>?
+      </h1>
+      <i class="hidden" id="user-id"><%= user_id %></i>
     </div>
   </div>
 </nav>
