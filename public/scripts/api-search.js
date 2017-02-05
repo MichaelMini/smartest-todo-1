@@ -1,20 +1,41 @@
-
+// <ul class="nav nav-pills left">
+//                         <li class="dropdown active span8">
+//                           <a class="dropdown-toggle" id="inp_impact" data-toggle="dropdown">
+//                             <i class="icon icon-envelope icon-white"></i> <span id="text">Suggestion</span><span class="caret"></span>
+//                           </a>
+//                           <ul ID="divNewNotifications" class="dropdown-menu">
+//                             <li><a>Food</a></li>
+//                             <li><a>Movies</a></li>
+//                             <li><a>Books</a></li>
+//                             <li><a>Products</a></li>
+//                           </ul>
+//                         </li>
+//                       </ul>
 
 function insertEntryInTodoList($domTable, entry){
-  var row = $("<tr>").addClass('api-result');
-  var firstCol = $("<td>")//.text(entry.id);
-  var secondCol = $("<td>").addClass('api-name').text(entry.name);
-  var sourceCol = $("<td>").addClass('api-source').text(entry.source);
-  var thirdCol = $("<td>").addClass('api-category').text(entry.category);
-  row.append(firstCol).append(secondCol).append(thirdCol).append(sourceCol);
-  $domTable.append(row);
-  $('#search-item').text($("#search").val());
+  // var row = $("<tr>").addClass('api-result');
+  // var firstCol = $("<td>")//.text(entry.id);
+  // var secondCol = $("<td>").addClass('api-name').text(entry.name);
+  // var sourceCol = $("<td>").addClass('api-source').text(entry.source);
+  // // var thirdCol = $("<td>").addClass('api-category').text(entry.category);
+  // row.append(secondCol).append(sourceCol);
+  // $domTable.append(row);
+ //  var row = $("<tr>").addClass('api-result');
+ // var firstCol = $("<th>")//.text(entry.id);
+ //  var secondCol = $("<th>").text('name');
+ //  var sourceCol = $("<th>").text('category');
+ //  // var thirdCol = $("<td>").addClass('api-category').text(entry.category);
+ //  row.append(secondCol).append(sourceCol);
+ //  $domTable.prepend(row);
+  $('#search-item').text(entry.name);
   $('#text').text(entry.category);
+  $('.api-source').text(entry.source);
   $('#idnum').text(entry.id);
 
 }
 
 $(function(){
+  $(".save-button").hide()
   var $todo_entry_table = $('table.todo_entries');
   $('[action="/search"]').on('submit', function(event) {
     // TODO: blank the search bar
@@ -27,6 +48,7 @@ $(function(){
         console.log("sadface.  no todo entry for you.");
       } else {
         insertEntryInTodoList($todo_entry_table, data)
+        $(".save-button").show()
         console.log('from goodread.js in public/scripts:', data);
       }
     });
@@ -40,7 +62,7 @@ $(function(){
   $('[action="/save"]').on('submit', function(event) {
     event.preventDefault();
     var name = $('.api-name').text();
-    var category = $('.api-category').text();
+    var category = $('#text').text();
     var userId = $('#user-id').text();
     var done_status = false;
     var apiSource = $('.api-source').text();
