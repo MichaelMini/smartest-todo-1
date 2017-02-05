@@ -138,12 +138,13 @@ app.post("/save", (req, res) => {
 
   let savedTodo = req.body.name;
   let savedCategory = req.body.category;
+  let apiSource = req.body.apiSource;
   let doneStatus = req.body.done_status;
   let userId = req.body.userId;
 
 
   knex.select().table('todos')
-    .insert( {'todo_item': savedTodo, 'todo_catagory': savedCategory, 'done_status': doneStatus, 'user_id': userId })
+    .insert( {'todo_item': savedTodo, 'todo_catagory': savedCategory, 'api_source': apiSource, 'done_status': doneStatus, 'user_id': userId })
     .catch((err) => {
       if (err) {
         console.log(err);
