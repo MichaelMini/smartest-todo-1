@@ -58,9 +58,9 @@
                 </thead>
                 <% for (var item of todo_items) { %>
                   <tr>
-                    <td> <%= item.todo_item_id %> </td>
-                    <td> <%= item.name %> </td>
                     <td> <%= item.category %> </td>
+                    <td> <%= item.name %> </td>
+                    <td> <%= item.source %> </td>
                   </tr>
                 <% } %>
               </table>

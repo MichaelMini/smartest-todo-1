@@ -170,18 +170,60 @@ app.get("/", (req, res) => {
           res.status(500).send("oh crap.  see server log.");
             return;
         }
-        // console.log(results[0].user_name);
+        var realTodo_array = [];
+        knex.select().from('todos').where('user_id', req.user).then(function(results){
+
+          results.forEach(function(todoRow){
+              var realTodo_items = {};
+              var name = todoRow.todo_item;
+              var category = todoRow.todo_catagory;
+              var source = todoRow.api_source;
+
+              realTodo_items.name = name;
+              realTodo_items.category = category;
+              realTodo_items.source = source;
+              realTodo_array.push(realTodo_items)
+             // console.log('From the DATABASE: =>', todoRow.todo_item)
+          })
+          // console.log('realTodo_array=>\n', realTodo_array)
+                  // console.log(results[0].user_name);
         // console.log("I hate everything about you -- Ugly Kid Joe");
-        let templateVar = {
-          user_name: results[0].user_name,
-          user_id: req.user,
-          todo_items: [
-            // { todo_item_id: 22, name: "*be awesome", category: "Life Goal" },
-            // { todo_item_id: 26, name: "*breath", category: "Product" },
-            // { todo_item_id: 32, name: "*rawk", category: "Music" },
-          ]
-        };
-        res.render("index", templateVar);
+          let templateVar = {
+            user_name: results[0].user_name,
+            user_id: req.user,
+            // todo_items: [
+            //   // { todo_item_id: 22, name: "*be awesome", category: "Life Goal" },
+            //   // { todo_item_id: 26, name: "*breath", category: "Product" },
+            //   // { todo_item_id: 32, name: "*rawk", category: "Music" }
+
+            // ]
+            todo_items: realTodo_array
+          };
+          console.log('realTodo_array=>\n', realTodo_array)
+          //TODO display all content from todos table for a user
+
+          res.render("index", templateVar);
+        })
+
+
+
+        // // console.log(results[0].user_name);
+        // // console.log("I hate everything about you -- Ugly Kid Joe");
+        // let templateVar = {
+        //   user_name: results[0].user_name,
+        //   user_id: req.user,
+        //   // todo_items: [
+        //   //   // { todo_item_id: 22, name: "*be awesome", category: "Life Goal" },
+        //   //   // { todo_item_id: 26, name: "*breath", category: "Product" },
+        //   //   // { todo_item_id: 32, name: "*rawk", category: "Music" }
+
+        //   // ]
+        //   todo_items: realTodo_array
+        // };
+        // console.log('realTodo_array=>\n', realTodo_array)
+        // //TODO display all content from todos table for a user
+
+        // res.render("index", templateVar);
       }
     );
   } else {
