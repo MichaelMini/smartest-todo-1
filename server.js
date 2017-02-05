@@ -241,6 +241,11 @@ app.post("/search", (req, res) => {
     .then(function(apiResponses){
 
       let goodReadsResponse;
+      console.log('apiResponses: ', apiResponses)
+
+
+
+
       if (apiResponses[0].e) {
         goodReadsResponse = { }; // dummy data to deal with error in API call
       } else {
@@ -273,7 +278,7 @@ app.post("/search", (req, res) => {
         category: category,
         source: source
       };
-      console.log('goodReadsResponse: ', goodReadsResponse)
+      console.log('goodReadsResponse: ', goodReadsResponse);
       console.log('outgoingResponse: ',outgoingResponse);
       res.json(outgoingResponse);
     })
