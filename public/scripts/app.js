@@ -26,8 +26,8 @@ $(() => {
   // To Disable Save Button By Default
   $("button[action='/save']").attr('disabled','disabled');
   // When User Fills Out Form Completely
-  $("form[action='/search']").keyup(function(){
-    if ($.trim($("#search").val())) {
+  $("form[action='/search']").submit(function(){
+    if ($("#search-item").text() !== 'My Item') {
       $("button[action='/save']").removeAttr('disabled');
     }
   });
