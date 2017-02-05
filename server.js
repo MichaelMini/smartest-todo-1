@@ -19,7 +19,7 @@ const knexLogger  = require('knex-logger');
 // Seperated Routes for each Resource
 const usersRoutes       = require("./routes/users");
 
-const AmazonProvider     = require('./api/amazon.js');
+const PiranhaxProvider   = require('./api/piranhax.js');
 const GoodreadsProvider  = require('./api/goodread.js');
 const MovieDBProvider    = require('./api/moviedb.js');
 const YelpProvider       = require('./api/yelp.js');
@@ -185,8 +185,8 @@ app.post("/search", (req, res) => {
 
       GoodreadsProvider.search(term),
       YelpProvider.search(term),
-      MovieDBProvider.search(term)
-      // AmazonProvider.search(term)
+      MovieDBProvider.search(term),
+      PiranhaxProvider.search(term)
     ].map(reflect))//.then(console.log('from app.post in Server:', data))
     // .then(data => res.send(data));
     .then(function(apiResponses){

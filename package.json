@@ -12,7 +12,6 @@
   "author": "Lighthouse Labs",
   "license": "ISC",
   "dependencies": {
-    "amazon-product-api": "^0.4.3",
     "body-parser": "^1.15.2",
     "cookie-session": "^2.0.0-alpha.2",
     "dotenv": "^2.0.0",
@@ -24,9 +23,9 @@
     "moviedb": "^0.2.7",
     "node-sass-middleware": "^0.9.8",
     "pg": "^6.0.2",
-    "the-rotten-api": "^1.1.0",
-    "yelp": "^1.0.2",
-    "simple-goodreads": "^1.0.1"
+    "piranhax": "^1.0.5",
+    "simple-goodreads": "^1.0.1",
+    "yelp": "^1.0.2"
   },
   "devDependencies": {}
 }
