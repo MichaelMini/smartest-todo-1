@@ -8,15 +8,6 @@
   <%- include('partials/_nav')%>
     <div class="container-fluid">
       <main>
-        <form action="/save" method="post">
-          <div class="row">
-            <div class="col-xs-8 col-xs-offset-2 col-sm-6 col-sm-offset-3">
-              <span class="input-group-btn">
-                <button action="/save" class="btn btn-default" value="Submit" type="submit">Save</button>
-              </span>
-            </div><!-- /.col-lg-6 -->
-          </div><!-- /.row -->
-        </form>
         <form action="/search" method="POST">
           <div class="row">
             <div class="col-xs-8 col-xs-offset-2 col-sm-6 col-sm-offset-3">
@@ -28,19 +19,18 @@
               </div><!-- /input-group -->
             </div><!-- /.col-lg-6 -->
           </div><!-- /.row -->
+        </form>
           <div class="row">
             <div class="col-xs-8 col-xs-offset-2 col-sm-6 col-sm-offset-3">
               <table class="table todo_entries">
                 <thead>
                   <tr>
-                    <th>#</th>
-                    <th id="search-item">Main Content</th>
-                    <th>
+                    <td>
                       <!-- Category -->
                       <ul class="nav nav-pills left">
                         <li class="dropdown active span8">
                           <a class="dropdown-toggle" id="inp_impact" data-toggle="dropdown">
-                            <i class="icon icon-envelope icon-white"></i> <span id="text">Suggestion</span><span class="caret"></span>
+                            <i class="icon icon-envelope icon-white"></i> <span id="text"></span><span class="caret"></span>
                           </a>
                           <ul ID="divNewNotifications" class="dropdown-menu">
                             <li><a>Food</a></li>
@@ -50,14 +40,27 @@
                           </ul>
                         </li>
                       </ul>
-                    </th>
+                    </td>
+                    <td id="search-item"></td>
+                    <td class="api-source"></td>
+                    <td>
+                      <form action="/save" method="post">
+                        <div class="row">
+                          <div class="col-xs-8 col-xs-offset-2 col-sm-6 col-sm-offset-3">
+                            <span class="input-group-btn save-button">
+                              <button class="btn btn-default" value="Submit" type="submit">Save</button>
+                            </span>
+                          </div><!-- /.col-lg-6 -->
+                        </div><!-- /.row -->
+                      </form>
+                    </td>
                   </tr>
                 </thead>
                 <% for (var item of todo_items) { %>
                   <tr>
-                    <td> <%= item.todo_item_id %> </td>
-                    <td> <%= item.name %> </td>
                     <td> <%= item.category %> </td>
+                    <td> <%= item.name %> </td>
+                    <td> <%= item.source %> </td>
                   </tr>
                 <% } %>
               </table>

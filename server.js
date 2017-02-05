@@ -113,7 +113,7 @@ app.post("/register", (req, res) => {
     }
   })
   .then((results) => {
-    console.log("hopefully the new userid is in this: ", results);
+    // console.log("hopefully the new userid is in this: ", results);
     if (results.length !== 1) {
       console.log("what the hell is with this non-length-1 result: ", results);
       res.status(500).send("oh crap.  see server log.");
@@ -131,37 +131,88 @@ app.post("/register", (req, res) => {
   });
 });
 
-// knex.select().from('users').where('user_name', 'michael').asCallback((error, results) => {
-//   if(results.length === 0) {
-//     knex('users')
-//     .insert({'user_name': user_name, 'password': password})
-//     .returning('id').asCallback((error, results) => {
-//       // user should be inserted by now
-//     })
-//   }
-// });
+
+//Save todo to database
+app.post("/save", (req, res) => {
+
+  let savedTodo = req.body.name;
+  let savedCategory = req.body.category;
+  let apiSource = req.body.apiSource;
+  let doneStatus = req.body.done_status;
+  let userId = req.body.userId;
+
+
+  knex.select().table('todos')
+    .insert( {'todo_item': savedTodo, 'todo_catagory': savedCategory, 'api_source': apiSource, 'done_status': doneStatus, 'user_id': userId })
+    .then(function(){
+      console.log('Successfully Inserted')
+      res.redirect('/');
+    })
+    .catch((err) => {
+      if (err) {
+        console.log(err);
+        res.status(500).send("Sorry, there was an error");
+        return;
+      }
+  });
+});
+
+
+
+
 // Home page
 app.get("/", (req, res) => {
   if (req.user) {
+    console.log('user id is:', req.user)
+
     knex.select('user_name').from('users').where('id', req.user)
       .then((results) => {
-        console.log("hopefully the new userid is in this: ", results);
+        console.log("hopefully the new userid is in this: ", results, 'id: ', req.user);
         if (results.length !== 1) {
           console.log("what the hell is with this non-length-1 result: ", results);
           res.status(500).send("oh crap.  see server log.");
             return;
         }
-        // console.log(results[0].user_name);
-        console.log("I hate everything about you -- Ugly Kid Joe");
-        let templateVar = {
-          user_name: results[0].user_name,
-          todo_items: [
-            { todo_item_id: 22, name: "be awesome", category: "Life Goal" },
-            { todo_item_id: 26, name: "breath", category: "Product" },
-            { todo_item_id: 32, name: "rawk", category: "Music" },
-          ]
-        };
-        res.render("index", templateVar);
+        var user_name = results[0].user_name;
+        var realTodo_array = [];
+        knex.select().from('todos').where('user_id', req.user).then(function(results){
+          if(undefined){
+          console.log("Shit user_id is undefined: ", results);
+          res.status(500).send("results undefined for user_id!!");
+            return;
+          }else
+          results.forEach(function(todoRow){
+              var realTodo_items = {};
+              var name = todoRow.todo_item;
+              var category = todoRow.todo_catagory;
+              var source = todoRow.api_source;
+
+              realTodo_items.name = name;
+              realTodo_items.category = category;
+              realTodo_items.source = source;
+              realTodo_array.push(realTodo_items)
+             // console.log('From the DATABASE: =>', todoRow.todo_item)
+          })
+          // console.log('realTodo_array=>\n', realTodo_array)
+                  // console.log(results[0].user_name);
+        // console.log("I hate everything about you -- Ugly Kid Joe");
+          let templateVar = {
+            //todo fix this so that a name will show in the username field on index.ejs nav
+            user_name: user_name,
+            user_id: req.user,
+            // todo_items: [
+            //   // { todo_item_id: 22, name: "*be awesome", category: "Life Goal" },
+            //   // { todo_item_id: 26, name: "*breath", category: "Product" },
+            //   // { todo_item_id: 32, name: "*rawk", category: "Music" }
+
+            // ]
+            todo_items: realTodo_array
+          };
+          console.log('realTodo_array=>\n', realTodo_array)
+          //TODO display all content from todos table for a user
+
+          res.render("index", templateVar);
+        })
       }
     );
   } else {
@@ -192,7 +243,9 @@ app.post("/search", (req, res) => {
     .then(function(apiResponses){
 
       let goodReadsResponse;
+
       console.log('apiResponses:', apiResponses);
+
       if (apiResponses[0].e) {
         goodReadsResponse = { }; // dummy data to deal with error in API call
       } else {
@@ -215,12 +268,19 @@ app.post("/search", (req, res) => {
           case 4:
               category = "Products";
       }
+      var name = goodReadsResponse.v.title;
+      var source = goodReadsResponse.v.source;
+      var author = goodReadsResponse.v.author;
+      // goodReadsResponse.v.title
+
       let outgoingResponse = {
-        name: term,
-        id: todo_item_id,
-        category: category
+        name: name,
+        category: category,
+        source: source
       };
-      // console.log('outgoingResponse:', outgoingResponse);
+
+      console.log('goodReadsResponse: ', goodReadsResponse);
+
       res.json(outgoingResponse);
     })
     .catch(function(error){
