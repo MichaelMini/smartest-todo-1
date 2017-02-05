@@ -22,7 +22,7 @@ const usersRoutes       = require("./routes/users");
 const AmazonProvider     = require('./api/amazon.js');
 const GoodreadsProvider  = require('./api/goodread.js');
 const MovieDBProvider    = require('./api/moviedb.js');
-const YelpProvider      = require('./api/yelp.js');
+const YelpProvider       = require('./api/yelp.js');
 
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
 // 'dev' = Concise output colored by response status for development use.
@@ -183,13 +183,16 @@ app.post("/search", (req, res) => {
 
     var allData = Promise.all([
 
-      GoodreadsProvider.search(term)//,
-      // YelpProvider.search(term)
+      GoodreadsProvider.search(term),
+      YelpProvider.search(term),
+      MovieDBProvider.search(term)
+      // AmazonProvider.search(term)
     ].map(reflect))//.then(console.log('from app.post in Server:', data))
     // .then(data => res.send(data));
     .then(function(apiResponses){
 
       let goodReadsResponse;
+      console.log(apiResponses);
       if (apiResponses[0].e) {
         goodReadsResponse = { }; // dummy data to deal with error in API call
       } else {
