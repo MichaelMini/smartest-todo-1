@@ -2,6 +2,13 @@ body {
   background-color: $brand-color;
 }
 
+.navbar-header.navbar-right {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  padding: .1em 0;
+}
+
 form[action="/register"] {
   display: flex;
   flex-direction: column;

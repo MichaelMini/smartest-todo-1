@@ -5,6 +5,13 @@ body {
   background-color: #e6e6e6;
 }
 
+.navbar-header.navbar-right {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  padding: .1em 0;
+}
+
 form[action="/register"] {
   display: flex;
   flex-direction: column;
