@@ -146,9 +146,11 @@ app.post("/register", (req, res) => {
 // Home page
 app.get("/", (req, res) => {
   if (req.user) {
+    console.log('user id is:', req.user)
+
     knex.select('user_name').from('users').where('id', req.user)
       .then((results) => {
-        console.log("hopefully the new userid is in this: ", results);
+        console.log("hopefully the new userid is in this: ", results, 'id: ', req.user);
         if (results.length !== 1) {
           console.log("what the hell is with this non-length-1 result: ", results);
           res.status(500).send("oh crap.  see server log.");
@@ -158,6 +160,7 @@ app.get("/", (req, res) => {
         console.log("I hate everything about you -- Ugly Kid Joe");
         let templateVar = {
           user_name: results[0].user_name,
+          user_id: req.user,
           todo_items: [
             { todo_item_id: 22, name: "*be awesome", category: "Life Goal" },
             { todo_item_id: 26, name: "*breath", category: "Product" },
@@ -220,7 +223,7 @@ app.post("/search", (req, res) => {
         id: todo_item_id,
         category: category
       };
-      console.log(outgoingResponse);
+      console.log('outgoingResponse: ',outgoingResponse);
       res.json(outgoingResponse);
     })
     .catch(function(error){
