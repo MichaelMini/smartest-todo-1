@@ -27,6 +27,7 @@ function insertEntryInTodoList($domTable, entry){
  //  // var thirdCol = $("<td>").addClass('api-category').text(entry.category);
  //  row.append(secondCol).append(sourceCol);
  //  $domTable.prepend(row);
+console.log(entry);
   $('#search-item').text(entry.name);
   $('#text').text(entry.category);
   $('.api-source').text(entry.source);

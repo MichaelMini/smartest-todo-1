@@ -19,6 +19,7 @@ $(() => {
       alert('You did not fill out the field!');
       return false;
     }
+    $('#search-item').text($('#search').val());
   });
 
 });
