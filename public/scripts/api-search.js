@@ -14,7 +14,7 @@ function insertEntryInTodoList($domTable, entry){
  //  // var thirdCol = $("<td>").addClass('api-category').text(entry.category);
  //  row.append(secondCol).append(sourceCol);
  //  $domTable.prepend(row);
-  console.log(entry);
+  console.log('entry=>>>>', entry);
   $('#todo-item').text(entry.todo);
   $('#search-item').text(entry.name);
   $('#text').text(entry.category);
@@ -31,7 +31,7 @@ $(function(){
     event.preventDefault();
     $('.api-result').remove();
     var data = $(this).serialize();
-    console.log(data);
+    console.log('this.serialize =>>>', data);
     $.post('/search', data).then(function(data) {
       if (data.error) {
         console.log("sadface.  no todo entry for you.");
@@ -57,6 +57,7 @@ $(function(){
     var name = $('#search-item').text();
     var category = $('#text').text();
     var userId = $('#user-id').text();
+    var apiSource = $('#api-source').text();
     var done_status = false;
     // var apiSource = $('#api-source').text();
 
@@ -65,7 +66,8 @@ $(function(){
     savedTodo.category = category;
     savedTodo.userId = userId;
     savedTodo.done_status = done_status;
-    savedTodo.apiSource = apiSource;
+    savedTodo.apiSource = apiSource
+    // savedTodo.apiSource = apiSource;
 
     $.post('/save', savedTodo).then(function(data) {
     });
