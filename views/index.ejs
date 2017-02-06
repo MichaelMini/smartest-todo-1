@@ -13,9 +13,9 @@
         <form>
           <div class="container-fluid">
             <div class="row">
-              <table class="todolist-main col-xs-12 col-lg-6 col-lg-offset-3">
+              <table class="todolist-main col-xs-12 col-sm-8 col-sm-offset-2">
                 <% for (var item of todo_items) { %>
-                  <tr>
+                  <tr class="hovering">
                     <td> <%= item.name %> </td>
                     <td> <%= item.category %> </td>
                     <td> <%= item.img %> </td>

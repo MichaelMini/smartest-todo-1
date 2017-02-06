@@ -191,7 +191,7 @@ console.log("req.body:", req.body)
     .insert( {'todo_item': savedTodo, 'todo_catagory': savedCategory, 'api_source': apiSource, 'done_status': doneStatus, 'user_id': userId })
     .then(function(){
       console.log('Successfully Inserted')
-      // res.redirect('/');
+      res.redirect('/');
     })
     .catch((err) => {
       if (err) {

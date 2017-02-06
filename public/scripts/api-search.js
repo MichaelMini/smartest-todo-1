@@ -24,6 +24,7 @@ console.log('entry===>', entry);
 
 $(function(){
   // $(".save-button").hide()
+
   function insertEntryInTodoList($domTable, data){
 
     console.log('entry=>>>>', data);
@@ -34,13 +35,20 @@ $(function(){
     $('#todo-query').text(data.todo);
   }
 
+$(".todo_search").hide()
 
   var $todo_entry_table = $('table.todo_entries');
 
   $('[action="/search"]').on('submit', function(event) {
     // TODO: blank the search bar
     event.preventDefault();
-    $('.api-result').remove();
+    if ($(".todo_search").is(':hidden')) {
+      $(".todo_search").slideDown( "slow");
+    }
+
+    $(".todo_search").slideDown( "slow");
+
+      // $('div.todo_search').addClass('reveal')
 
     var data = $(this).serialize();
     console.log('this.serialize =>>>', data);
@@ -71,7 +79,7 @@ $(function(){
     var userId = $('#user-id').text();
     var apiSource = $('#api-source').text();
     var todo = $('#todo-query').text();
-console.log('where is todo-query???? ==>', todo)
+    console.log('where is todo-query???? ==>', todo)
     var done_status = false;
 
 
@@ -88,7 +96,7 @@ console.log('where is todo-query???? ==>', todo)
     });
 
     console.log('From save: ', '| todo_item => ', name, '| todo_catagory => ', category, '| api-source => ', apiSource, '| done_status => ', done_status, '| user_id => ', userId);
-
+    location.reload();
     let $tr = $('<tr>')
       .append($('<td>').addClass('category'))
       .append($('<td>').addClass('search-item'))
