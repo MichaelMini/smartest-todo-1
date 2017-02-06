@@ -1,20 +1,4 @@
-// <ul class="nav nav-pills left">
-//                         <li class="dropdown active span8">
-//                           <a class="dropdown-toggle" id="inp_impact" data-toggle="dropdown">
-//                             <i class="icon icon-envelope icon-white"></i> <span id="text">Suggestion</span><span class="caret"></span>
-//                           </a>
-//                           <ul ID="divNewNotifications" class="dropdown-menu">
-//                             <li><a>Food</a></li>
-//                             <li><a>Movies</a></li>
-//                             <li><a>Books</a></li>
-//                             <li><a>Products</a></li>
-//                           </ul>
-//                         </li>
-//                       </ul>
 
-<<<<<<< HEAD
-
-=======
 function insertEntryInTodoList($domTable, entry){
   // var row = $("<tr>").addClass('api-result');
   // var firstCol = $("<td>")//.text(entry.id);
@@ -30,31 +14,34 @@ function insertEntryInTodoList($domTable, entry){
  //  // var thirdCol = $("<td>").addClass('api-category').text(entry.category);
  //  row.append(secondCol).append(sourceCol);
  //  $domTable.prepend(row);
-console.log(entry);
+console.log('entry===>', entry);
   $('#todo-item').text(entry.todo);
   $('#search-item').text(entry.name);
   $('#text').text(entry.category);
   $('.api-source').text(entry.source);
   $('#idnum').text(entry.id);
 }
->>>>>>> parent of 8d847c1... moving some stuff around, just minor
 
 $(function(){
   // $(".save-button").hide()
   function insertEntryInTodoList($domTable, data){
 
     console.log('entry=>>>>', data);
-    $('#todo-item').text(data.term);
     $('#search-item').text(data.name);
-    $('#text').text(data.todoCategory);
+    $('#todo-item').text(data.term);
+    $('#category').text(data.category);
     $('#api-source').text(data.source);
-    $('#query').text(data.term);
+    $('#todo-query').text(data.todo);
   }
+
+
   var $todo_entry_table = $('table.todo_entries');
+
   $('[action="/search"]').on('submit', function(event) {
     // TODO: blank the search bar
     event.preventDefault();
     $('.api-result').remove();
+
     var data = $(this).serialize();
     console.log('this.serialize =>>>', data);
     $.post('/search', data).then(function(data) {
@@ -80,25 +67,27 @@ $(function(){
     var savedTodo = {}
 
     var name = $('#search-item').text();
-    var category = $('#text').text();
+    var category = $('#category').text();
     var userId = $('#user-id').text();
     var apiSource = $('#api-source').text();
+    var todo = $('#todo-query').text();
+console.log('where is todo-query???? ==>', todo)
     var done_status = false;
-    var apiSource = $('.api-source').text();
 
 
     savedTodo.name = name;
     savedTodo.category = category;
     savedTodo.userId = userId;
     savedTodo.done_status = done_status;
-    savedTodo.apiSource = apiSource
+    savedTodo.todo = todo;
+    savedTodo.apiSource = apiSource;
     // savedTodo.apiSource = apiSource;
 
     $.post('/save', savedTodo).then(function(data) {
       console.log("savedTodo ==>>>>", savedTodo)
     });
 
-    console.log('From save: ', '| todo_item => ', name, '| todo_catagory => ', category, '| api-source => ', apiSource '| done_status => ', done_status, '| user_id => ', userId);
+    console.log('From save: ', '| todo_item => ', name, '| todo_catagory => ', category, '| api-source => ', apiSource, '| done_status => ', done_status, '| user_id => ', userId);
 
     let $tr = $('<tr>')
       .append($('<td>').addClass('category'))
@@ -107,7 +96,5 @@ $(function(){
 
     $tr.find('.category').text(category);
     $tr.find('.search-item').text(name);
-
   })
-
 })

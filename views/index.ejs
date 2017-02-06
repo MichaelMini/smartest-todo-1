@@ -8,47 +8,12 @@
   <%- include('partials/_nav')%>
     <div class="container-fluid">
       <main>
-      <%- include('partials/_search')%>
-<!--         <form action="/search" method="POST">
-          <div class="row">
-            <div class="">
-              <div class="input-group">
-                <input id="search" type="text" name="search" autofocus="" class="form-control" placeholder="Search for...">
-                <span class="input-group-btn">
-                  <button class="btn btn-default" value="Submit" type="submit">Go!</button>
-                </span>
-              </div><!-- /input-group -->
-            </div><!-- /.col-lg-6 -->
-          </div><!-- /.row -->
-        </form> -->
-          <div class="row">
-            <div class="">
-              <table class="todo_entries">
-                <thead>
-                  <tr>
-                    <th id="search-item">My Item</th>
-                    <th>
-                      <form action="/save" method="post">
-                          <button action="/save" class="btn btn-default" value="Submit" type="submit">save to -></button>
-                      </form>
-                    </th>
-                    <th>
-                      <ul class="nav nav-pills left">
-                        <li class="dropdown active span8">
-                          <a class="dropdown-toggle" id="inp_impact" data-toggle="dropdown">
-                            <i class="icon icon-envelope icon-white"></i> <span id="text">AI suggestion...</span><span class="caret"></span>
-                          </a>
-                          <ul ID="divNewNotifications" class="dropdown-menu">
-                            <li><a>Food</a></li>
-                            <li><a>Movies</a></li>
-                            <li><a>Books</a></li>
-                            <li><a>Products</a></li>
-                          </ul>
-                        </li>
-                      </ul>
-                    </th>
-                  </tr>
-                </thead>
+
+        <%- include('partials/_search')%>
+        <form>
+          <div class="container-fluid">
+            <div class="row">
+              <table class="todolist-main col-xs-12 col-lg-6 col-lg-offset-3">
                 <% for (var item of todo_items) { %>
                   <tr>
                     <td> <%= item.name %> </td>

@@ -184,7 +184,7 @@ app.post("/save", (req, res) => {
   let apiSource = req.body.apiSource;
   let doneStatus = req.body.done_status;
   let userId = req.body.userId;
-
+console.log("req.body:", req.body)
   //Inserting here
   console.log('Successfully Inserted before knex!')
   knex.select().table('todos')
@@ -217,32 +217,41 @@ app.get("/", (req, res) => {
             return;
         }
         var user_name = results[0].user_name;
-        var realTodo_array = [];
+
+        // We need this
+
         knex.select().from('todos').where('user_id', req.user).then(function(results){
           if(undefined){
           console.log("Shit user_id is undefined: ", results);
           res.status(500).send("results undefined for user_id!!");
             return;
           }else
+
+          var realTodo_array = [];
           results.forEach(function(todoRow){
               var realTodo_items = {};
+
               var name = todoRow.todo_item;
               var category = todoRow.todo_catagory;
               var source = todoRow.api_source;
-              var query = todoRow.query;
+              var query = todoRow.todo_query;
+              //
               var done  = todoRow.done_status;
 
 
               realTodo_items.name = name;
               realTodo_items.category = category;
               realTodo_items.source = source;
+              // realTodo_items.api_source = api_source;
               realTodo_array.push(realTodo_items)
+
              // console.log('From the DATABASE: =>', todoRow.todo_item)
           })
           // console.log('realTodo_array=>\n', realTodo_array)
                   // console.log(results[0].user_name);
         // console.log("I hate everything about you -- Ugly Kid Joe");
         // TODO here pass to function insert
+
           let templateVar = {
             //todo fix this so that a name will show in the username field on index.ejs nav
             user_name: user_name,

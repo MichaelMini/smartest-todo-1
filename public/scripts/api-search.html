@@ -1014,9 +1014,44 @@ body .markdown-body
     page-break-after: avoid;
   }
 }
-</style><title>api-search</title></head><body><article class="markdown-body"><p>$(function(){<br />
+</style><title>api-search</title></head><body><article class="markdown-body"><p>// <ul class="nav nav-pills left"><br />
+//                         <li class="dropdown active span8"><br />
+//                           <a class="dropdown-toggle" id="inp_impact" data-toggle="dropdown"><br />
+//                             <i class="icon icon-envelope icon-white"></i> <span id="text">Suggestion</span><span class="caret"></span><br />
+//                           </a><br />
+//                           <ul ID="divNewNotifications" class="dropdown-menu"><br />
+//                             <li><a>Food</a></li><br />
+//                             <li><a>Movies</a></li><br />
+//                             <li><a>Books</a></li><br />
+//                             <li><a>Products</a></li><br />
+//                           </ul><br />
+//                         </li><br />
+//                       </ul></p>
+<p>function insertEntryInTodoList($domTable, entry){<br />
+  // var row = $(&ldquo;<tr>&ldquo;).addClass(&lsquo;api-result&rsquo;);<br />
+  // var firstCol = $(&ldquo;<td>&ldquo;)//.text(entry.id);<br />
+  // var secondCol = $(&ldquo;<td>&ldquo;).addClass(&lsquo;api-name&rsquo;).text(entry.name);<br />
+  // var sourceCol = $(&ldquo;<td>&ldquo;).addClass(&lsquo;api-source&rsquo;).text(entry.source);<br />
+  // // var thirdCol = $(&ldquo;<td>&ldquo;).addClass(&lsquo;api-category&rsquo;).text(entry.category);<br />
+  // row.append(secondCol).append(sourceCol);<br />
+  // $domTable.append(row);<br />
+ //  var row = $(&ldquo;<tr>&ldquo;).addClass(&lsquo;api-result&rsquo;);<br />
+ // var firstCol = $(&ldquo;<th>&ldquo;)//.text(entry.id);<br />
+ //  var secondCol = $(&ldquo;<th>&ldquo;).text(&lsquo;name&rsquo;);<br />
+ //  var sourceCol = $(&ldquo;<th>&ldquo;).text(&lsquo;category&rsquo;);<br />
+ //  // var thirdCol = $(&ldquo;<td>&ldquo;).addClass(&lsquo;api-category&rsquo;).text(entry.category);<br />
+ //  row.append(secondCol).append(sourceCol);<br />
+ //  $domTable.prepend(row);<br />
+console.log(&lsquo;entry===&gt;&rsquo;, entry);<br />
+  $(&lsquo;#todo-item&rsquo;).text(entry.todo);<br />
+  $(&lsquo;#search-item&rsquo;).text(entry.name);<br />
+  $(&lsquo;#text&rsquo;).text(entry.category);<br />
+  $(&lsquo;.api-source&rsquo;).text(entry.source);<br />
+  $(&lsquo;#idnum&rsquo;).text(entry.id);<br />
+}</p>
+<p>$(function(){<br />
   // $(&ldquo;.save-button&rdquo;).hide()<br />
-function insertEntryInTodoList($domTable, data){</p>
+  function insertEntryInTodoList($domTable, data){</p>
 <pre><code>console.log('entry=&gt;&gt;&gt;&gt;', data);
 $('#todo-item').text(data.term);
 $('#search-item').text(data.name);
@@ -1025,8 +1060,8 @@ $('#api-source').text(data.source);
 $('#query').text(data.term);
 </code></pre>
 <p>}<br />
-  var $todo_entry_table = $(&lsquo;table.todo_entries&rsquo;);<br />
-  $(&lsquo;[action=&rdquo;/search&rdquo;]&rsquo;).on(&lsquo;submit&rsquo;, function(event) {<br />
+  var $todo_entry_table = $(&lsquo;table.todo_entries&rsquo;);</p>
+<p>$(&lsquo;[action=&rdquo;/search&rdquo;]&rsquo;).on(&lsquo;submit&rsquo;, function(event) {<br />
     // TODO: blank the search bar<br />
     event.preventDefault();<br />
     $(&lsquo;.api-result&rsquo;).remove();<br />
@@ -1041,12 +1076,11 @@ $('#query').text(data.term);
         $(&ldquo;.save-button&rdquo;).show()<br />
         console.log(&lsquo;from goodread.js in public/scripts:&rsquo;, data);<br />
       }<br />
-    });</p>
-<pre><code>// TODO: maybe some error handling on the ajax call?
-//        -- including a .catch for exceptions
-//        -- including the possiblity that the backend says "fuck no"
-</code></pre>
-<p>})<br />
+    });<br />
+    // TODO: maybe some error handling on the ajax call?<br />
+    //        &ndash; including a .catch for exceptions<br />
+    //        &ndash; including the possiblity that the backend says &ldquo;fuck no&rdquo;<br />
+  })<br />
 })</p>
 <p>$(function(){<br />
   $(&lsquo;[action=&rdquo;/save&rdquo;]&rsquo;).on(&lsquo;submit&rsquo;, function(event) {<br />
@@ -1058,7 +1092,7 @@ var category = $('#text').text();
 var userId = $('#user-id').text();
 var apiSource = $('#api-source').text();
 var done_status = false;
-// var apiSource = $('#api-source').text();
+var apiSource = $('.api-source').text();
 
 
 savedTodo.name = name;

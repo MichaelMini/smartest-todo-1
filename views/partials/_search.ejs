@@ -1,47 +1,50 @@
-        <form action="/search" method="POST">
-          <div class="row">
-            <div class="col-xs-12 col-md-6">
-              <div class="input-group">
+<div class="container-fluid">
+  <div class="container-fluid">
+    <div class="row">
+      <table class="todo_search col-xs-12 col-lg-6 col-lg-offset-3">
+        <thead>
+          <tr>
+          <!-- Displays REsults -->
+            <th></th>
+            <th id="todo-query"></th>
+            <th></th>
+            <th id="search-item"></th>
+            <th id="api-source"></th>
+            <th></th>
+            <th id="todo-item"></th>
+
+            <th><ul class="nav nav-pills left">
+              <li class="dropdown active span8">
+                <a class="dropdown-toggle" id="inp_impact" data-toggle="dropdown">
+                  <i class="icon icon-envelope icon-white"></i> <span id="category">category</span><span class="caret"></span>
+                </a>
+                <ul ID="divNewNotifications" class="dropdown-menu">
+                  <li><a>Food</a></li>
+                  <li><a>Movies</a></li>
+                  <li><a>Books</a></li>
+                  <li><a>Products</a></li>
+                </ul>
+              </li>
+            </ul></th>
+            <th><form action="/save" method="post">
+                <button action="/save" class="btn btn-default" value="Submit" type="submit">save</button>
+              </form>
+            </th>
+          </tr>
+        </thead>
+                <form action="/search" method="POST">
+          <div class="container">
+            <div class="row">
+              <div class="input-group col-xs-12 col-lg-6 col-lg-offset-3 ">
                 <input id="search" type="text" name="search" autofocus="" class="form-control" placeholder="Search for...">
                 <span class="input-group-btn">
-                  <button class="btn btn-default" value="Submit" type="submit">Go!</button>
+                <button class="btn btn-default" value="Submit" type="submit">Go!</button>
                 </span>
-              </div><!-- /input-group -->
-            </div><!-- /.col-lg-6 -->
-          </div><!-- /.row -->
+              </div>
+            </div>
+          </div>
         </form>
-
-<div class="row">
-  <div class="col-xs-12">
-    <table class="todo_search">
-
-      <thead>
-        <tr>
-        <!-- Displays REsults -->
-          <th id="search-item">My Item</th>
-          <th id="api-source">api</th>
-          <th id="todo_query">query</th>
-          <th><form action="/save" method="post">
-              <button action="/save" class="btn btn-default" value="Submit" type="submit">save to -></button>
-            </form>
-          </th>
-
-          <th><ul class="nav nav-pills left">
-            <li class="dropdown active span8">
-              <a class="dropdown-toggle" id="inp_impact" data-toggle="dropdown">
-                <i class="icon icon-envelope icon-white"></i> <span id="text">AI suggestion...</span><span class="caret"></span>
-              </a>
-              <ul ID="divNewNotifications" class="dropdown-menu">
-                <li><a>Food</a></li>
-                <li><a>Movies</a></li>
-                <li><a>Books</a></li>
-                <li><a>Products</a></li>
-              </ul>
-            </li>
-          </ul></th>
-        </tr>
-      </thead>
-
-    </table>
+      </table>
+    </div>
   </div>
 </div>
