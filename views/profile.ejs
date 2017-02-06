@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Register Page</title>
+    <%- include('partials/_head')%>
+  </head>
+  <body>
+    <section>
+      <h3>Change Username/Password</h3>
+      <form action="/profile" method="PUT" style="margin:150px;">
+        <label for="new_name">Change User Name</label><br>
+        <input id="new_name" type="text" name="new_name" placeholder="Enter your new username here" style="width: 200px">
+        <br>
+        <label for="new_password">Create Your Password Here</label><br>
+        <input id="new_password" type="password" name="new_password" placeholder="Enter your new password here" style="width: 200px">
+        <input type="submit" value="Submit">
+      </form>
+    </section>
+  </body>
+</html>

@@ -1,4 +1,29 @@
 $(() => {
+
+  //Change username/password
+  $("form[action='/profile']").submit(function(event) {
+    event.preventDefault();
+
+    var accountChanges = {};
+    var name = $(this).find('#new_name').val();
+    var password = $(this).find('#new_password').val()
+
+    accountChanges.name = name;
+    accountChanges.password = password;
+
+    $.ajax({
+      method: "PUT",
+      url: "/profile",
+      data: accountChanges
+    })
+    .then(function(data) {
+      alert("Account info succesfully changed");
+    })
+    .done((users) => {
+      window.location.replace("/");
+    });
+  });
+
   $.ajax({
     method: "GET",
     url: "/api/users"

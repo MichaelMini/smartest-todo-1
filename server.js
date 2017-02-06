@@ -131,10 +131,27 @@ app.post("/register", (req, res) => {
   });
 });
 
+
+//Profile page
+app.get("/profile", (req, res) => {
+  //Make sure user is logged in
+  if (!req.user) {
+    res.status(401).send("You're not logged in");
+  } else {
+    res.render('profile');
+    }
+});
+
 //Editing profile
 app.put("/profile", (req, res) => {
+
   const newName = req.body.name;
   const newPassword = req.body.password;
+
+  //Make sure user is logged in
+  if (!req.user) {
+    res.status(401).send("You're not logged in");
+  } else {
 
     //If any fields are empty, send error
     if (!req.body.name || !req.body.password) {
@@ -143,17 +160,18 @@ app.put("/profile", (req, res) => {
     } else {
 
       //Otherwise, change user account info
-      knex.select().from('users')
-      .where('id', req.session.user_id)
+      knex.select().table('users')
+      .where({ id: req.user })
       .update({'user_name': newName, 'password': newPassword})
-
-      res.redirect('/');
-
+      .catch(function(error) {
+        console.error("There was an Error", error);
+      });
+      res.json({
+        success: "succesfully updated"
+      });
     }
-
+  }
 });
-
-
 
 
 //Save todo to database
