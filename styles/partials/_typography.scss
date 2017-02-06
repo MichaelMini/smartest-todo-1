@@ -6,15 +6,19 @@ tr {
   @extend .underline;
 }
 
-button.logout{
+button.logout, button.save, .dropdown-toggle{
   transition: 300ms;
   border-radius: 3px;
   background-color: $brand-blue;
 }
 
-button.logout:hover {
+button.logout:hover, button.save:hover, .dropdown-toggle:hover {
   transition: 300ms;
   background-color: $brand-orange;
   @extend .scale;
   @extend .shadow;
+}
+
+.search-input {
+  margin-top: 40px;
 }

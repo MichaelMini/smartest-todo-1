@@ -42,3 +42,8 @@ td, th {
   @extend .top-line;
   background-color: $brand-orange;
 }
+
+
+#search-item {
+  background-color: lighten($brand-orange, 1);
+}
