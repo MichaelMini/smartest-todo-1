@@ -22,3 +22,15 @@ button.logout:hover, button.save:hover, .dropdown-toggle:hover {
 .search-input {
   margin-top: 40px;
 }
+
+.edit-profile {
+  transition: 300ms;
+  background-color: $brand-blue;
+}
+
+.edit-profile:hover {
+  transition: 300ms;
+  background-color: $brand-orange;
+  @extend .scale;
+  @extend .shadow;
+}

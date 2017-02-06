@@ -35,7 +35,7 @@ $(() => {
 
   // Toggle Options
   $('#divNewNotifications li > a').click(function(){
-    $('#text').text($(this).html());
+    $('#category').text($(this).html());
   });
 
   // Search Form Verifier

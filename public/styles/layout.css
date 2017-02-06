@@ -1,7 +1,7 @@
 /* Feel free to sass it up in the partials,
 or right here in the layout if partials scare you.
 Feel free to add partials news if needed.*/
-.shadow, .navbar-inverse, .todo_search, .todolist-main, .hovering:hover, button.logout:hover, button.save:hover, .dropdown-toggle:hover {
+.shadow, .navbar-inverse, .todo_search, .todolist-main, .hovering:hover, button.logout:hover, button.save:hover, .dropdown-toggle:hover, .edit-profile:hover {
   -webkit-box-shadow: 0px 4px 15px -3px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 0px 4px 15px -3px rgba(0, 0, 0, 0.75);
   box-shadow: 0px 4px 15px -3px rgba(0, 0, 0, 0.75);
@@ -19,7 +19,7 @@ Feel free to add partials news if needed.*/
   border-bottom: 5px solid #3a9fc0;
 }
 
-.scale, button.logout:hover, button.save:hover, .dropdown-toggle:hover {
+.scale, button.logout:hover, button.save:hover, .dropdown-toggle:hover, .edit-profile:hover {
   transform: scale(1.05);
 }
 
@@ -94,4 +94,14 @@ button.logout:hover, button.save:hover, .dropdown-toggle:hover {
 
 .search-input {
   margin-top: 40px;
+}
+
+.edit-profile {
+  transition: 300ms;
+  background-color: #d4ebf2;
+}
+
+.edit-profile:hover {
+  transition: 300ms;
+  background-color: #ffc966;
 }
