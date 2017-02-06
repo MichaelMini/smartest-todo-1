@@ -2,11 +2,25 @@ body {
   background-color: $brand-color;
 }
 
+td, th {
+    padding: 0.8em;
+}
+
+main {
+  margin: 30px auto;
+  max-width: 400px;
+}
+
 .navbar-header.navbar-right {
   display: flex;
   flex-direction: row-reverse;
   align-items: center;
   padding: .1em 0;
+}
+
+table {
+  margin-top: 30px;
+  width: 100%;
 }
 
 form[action="/register"] {
@@ -48,4 +62,8 @@ button[action="/save"]:hover,
   ul {
     width: 0;
   }
+}
+
+thead tr th:last-child {
+  width: 180px;
 }

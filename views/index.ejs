@@ -10,7 +10,7 @@
       <main>
         <form action="/search" method="POST">
           <div class="row">
-            <div class="col-xs-8 col-xs-offset-2 col-sm-6 col-sm-offset-3">
+            <div class="">
               <div class="input-group">
                 <input id="search" type="text" name="search" autofocus="" class="form-control" placeholder="Search for...">
                 <span class="input-group-btn">
@@ -21,8 +21,8 @@
           </div><!-- /.row -->
         </form>
           <div class="row">
-            <div class="col-xs-8 col-xs-offset-2 col-sm-6 col-sm-offset-3">
-              <table class="table todo_entries">
+            <div class="">
+              <table class="todo_entries">
                 <thead>
                   <tr>
                     <th id="search-item">My Item</th>
@@ -46,23 +46,6 @@
                         </li>
                       </ul>
                     </th>
-                    <td>
-                      <!-- Category -->
-                    </td>
-                    <td id="todo-item"></td>
-                    <td id="search-item"></td>
-                    <td class="api-source"></td>
-                    <td>
-                      <form action="/save" method="post">
-                        <div class="row">
-                          <div class="col-xs-8 col-xs-offset-2 col-sm-6 col-sm-offset-3">
-                            <span class="input-group-btn save-button">
-                              <button class="btn btn-default" value="Submit" type="submit">Save</button>
-                            </span>
-                          </div><!-- /.col-lg-6 -->
-                        </div><!-- /.row -->
-                      </form>
-                    </td>
                   </tr>
                 </thead>
                 <% for (var item of todo_items) { %>
