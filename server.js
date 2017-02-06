@@ -237,7 +237,7 @@ app.post("/search", (req, res) => {
       // GoodreadsProvider.search(term),
       // YelpProvider.search(term),
       // MovieDBProvider.search(term),
-      PiranhaxProvider.search(term)
+      PiranhaxProvider.search(term),
     ].map(reflect))//.then(console.log('from app.post in Server:', data))
     // .then(data => res.send(data));
     .then(function(apiResponses){
