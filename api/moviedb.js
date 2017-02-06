@@ -8,6 +8,7 @@ module.exports = {
 
       MovieDB.searchMovie(query, (err, data) => {
         if(err) { return reject(err); }
+        // console.log('moviedb title : ',data.results)
         let moviedbResults = {
           title: data.results[0].title,
           source: "The Movie DB"

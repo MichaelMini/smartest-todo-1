@@ -19,7 +19,6 @@ button.logout:hover, button.save:hover, .dropdown-toggle:hover {
   @extend .shadow;
 }
 
-
 .search-input {
   margin-top: 40px;
 }
@@ -34,27 +33,4 @@ button.logout:hover, button.save:hover, .dropdown-toggle:hover {
   background-color: $brand-orange;
   @extend .scale;
   @extend .shadow;
-  z-index: 100;
 }
-
-/*. TODO implement the background blur on hover of row */
-div.blur{
-  position: fixed;
-  display: block;
-  background-color: black;
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  z-index: -1000;
-}
-
-.hovering:hover div.blur{
-  position: fixed;
-  display: block;
-  background-color: black;
-  width: 100%;
-  height: 100%;
-  opacity: 1;
-  z-index: 10;
-}
-

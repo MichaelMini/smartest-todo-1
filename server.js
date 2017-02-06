@@ -287,10 +287,10 @@ app.post("/search", (req, res) => {
 
     var allData = Promise.all([
 
-      // GoodreadsProvider.search(term),
-      // YelpProvider.search(term),
-      // MovieDBProvider.search(term),
-      PiranhaxProvider.search(term),
+      GoodreadsProvider.search(term),
+      YelpProvider.search(term),
+      MovieDBProvider.search(term),
+      PiranhaxProvider.search(term)
     ].map(reflect))//.then(console.log('from app.post in Server:', data))
     // .then(data => res.send(data));
     .then(function(apiResponses){
