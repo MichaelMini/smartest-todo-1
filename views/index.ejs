@@ -8,7 +8,8 @@
   <%- include('partials/_nav')%>
     <div class="container-fluid">
       <main>
-        <form action="/search" method="POST">
+      <%- include('partials/_search')%>
+<!--         <form action="/search" method="POST">
           <div class="row">
             <div class="">
               <div class="input-group">
@@ -19,7 +20,7 @@
               </div><!-- /input-group -->
             </div><!-- /.col-lg-6 -->
           </div><!-- /.row -->
-        </form>
+        </form> -->
           <div class="row">
             <div class="">
               <table class="todo_entries">
@@ -50,9 +51,11 @@
                 </thead>
                 <% for (var item of todo_items) { %>
                   <tr>
-                    <td> <%= item.category %> </td>
                     <td> <%= item.name %> </td>
+                    <td> <%= item.category %> </td>
+                    <td> <%= item.img %> </td>
                     <td> <%= item.source %> </td>
+
                   </tr>
                 <% } %>
               </table>

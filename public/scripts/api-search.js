@@ -1,30 +1,17 @@
 
-function insertEntryInTodoList($domTable, entry){
-  // var row = $("<tr>").addClass('api-result');
-  // var firstCol = $("<td>")//.text(entry.id);
-  // var secondCol = $("<td>").addClass('api-name').text(entry.name);
-  // var sourceCol = $("<td>").addClass('api-source').text(entry.source);
-  // // var thirdCol = $("<td>").addClass('api-category').text(entry.category);
-  // row.append(secondCol).append(sourceCol);
-  // $domTable.append(row);
- //  var row = $("<tr>").addClass('api-result');
- // var firstCol = $("<th>")//.text(entry.id);
- //  var secondCol = $("<th>").text('name');
- //  var sourceCol = $("<th>").text('category');
- //  // var thirdCol = $("<td>").addClass('api-category').text(entry.category);
- //  row.append(secondCol).append(sourceCol);
- //  $domTable.prepend(row);
-  console.log('entry=>>>>', entry);
-  $('#todo-item').text(entry.todo);
-  $('#search-item').text(entry.name);
-  $('#text').text(entry.category);
-  $('#api-source').text(entry.source);
-  $('#idnum').text(entry.id);
-}
+
 
 $(function(){
   // $(".save-button").hide()
+  function insertEntryInTodoList($domTable, data){
 
+    console.log('entry=>>>>', data);
+    $('#todo-item').text(data.term);
+    $('#search-item').text(data.name);
+    $('#text').text(data.todoCategory);
+    $('#api-source').text(data.source);
+    $('#query').text(data.term);
+  }
   var $todo_entry_table = $('table.todo_entries');
   $('[action="/search"]').on('submit', function(event) {
     // TODO: blank the search bar
@@ -36,6 +23,7 @@ $(function(){
       if (data.error) {
         console.log("sadface.  no todo entry for you.");
       } else {
+        // Here's where we insert into Todolist!!!
         insertEntryInTodoList($todo_entry_table, data)
         $(".save-button").show()
         console.log('from goodread.js in public/scripts:', data);
@@ -70,9 +58,10 @@ $(function(){
     // savedTodo.apiSource = apiSource;
 
     $.post('/save', savedTodo).then(function(data) {
+      console.log("savedTodo ==>>>>", savedTodo)
     });
 
-    console.log('From save: ', '| todo_item => ', name, '| todo_catagory => ', category, '| api-source => ', apiSource, '| done_status => ', done_status, '| user_id => ', userId);
+    console.log('From save: ', '| todo_item => ', name, '| todo_catagory => ', category, '| api-source => ', apiSource '| done_status => ', done_status, '| user_id => ', userId);
 
     let $tr = $('<tr>')
       .append($('<td>').addClass('category'))

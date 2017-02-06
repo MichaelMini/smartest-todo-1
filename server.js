@@ -177,12 +177,15 @@ app.put("/profile", (req, res) => {
 //Save todo to database
 app.post("/save", (req, res) => {
 
+  // These are the variables to be inserted through knex
+  // To database
   let savedTodo = req.body.name;
   let savedCategory = req.body.category;
   let apiSource = req.body.apiSource;
   let doneStatus = req.body.done_status;
   let userId = req.body.userId;
 
+  //Inserting here
   console.log('Successfully Inserted before knex!')
   knex.select().table('todos')
     .insert( {'todo_item': savedTodo, 'todo_catagory': savedCategory, 'api_source': apiSource, 'done_status': doneStatus, 'user_id': userId })
@@ -198,8 +201,6 @@ app.post("/save", (req, res) => {
       }
   });
 });
-
-
 
 
 // Home page
@@ -228,6 +229,9 @@ app.get("/", (req, res) => {
               var name = todoRow.todo_item;
               var category = todoRow.todo_catagory;
               var source = todoRow.api_source;
+              var query = todoRow.query;
+              var done  = todoRow.done_status;
+
 
               realTodo_items.name = name;
               realTodo_items.category = category;
@@ -238,18 +242,16 @@ app.get("/", (req, res) => {
           // console.log('realTodo_array=>\n', realTodo_array)
                   // console.log(results[0].user_name);
         // console.log("I hate everything about you -- Ugly Kid Joe");
+        // TODO here pass to function insert
           let templateVar = {
             //todo fix this so that a name will show in the username field on index.ejs nav
             user_name: user_name,
             user_id: req.user,
-            // todo_items: [
-            //   // { todo_item_id: 22, name: "*be awesome", category: "Life Goal" },
-            //   // { todo_item_id: 26, name: "*breath", category: "Product" },
-            //   // { todo_item_id: 32, name: "*rawk", category: "Music" }
-
-            // ]
+            //This is our object to send to FRont End!!!
+            // Variable for frontend
             todo_items: realTodo_array
           };
+
           console.log('realTodo_array=>\n', realTodo_array)
           //TODO display all content from todos table for a user
 
