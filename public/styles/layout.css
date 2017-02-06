@@ -23,6 +23,17 @@ Feel free to add partials news if needed.*/
   transform: scale(1.05);
 }
 
+@keyframes slidein {
+  0% {
+    opacity: 0;
+    transform: translateY(50px) scale(0.93);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0px) scale(1);
+  }
+}
+
 body {
   background-color: ivory;
 }
@@ -48,13 +59,19 @@ td, th {
   background-color: #ffac14;
 }
 
+.todolist-main {
+  animation-duration: 500ms;
+  transition-timing-function: ease-in;
+  animation-name: slidein;
+}
+
 .hovering {
   transition: 300ms;
   background-color: #d4ebf2;
 }
 
 .hovering:hover {
-  transform: scale(1.08);
+  transform: scale(1.05);
   transition: 300ms;
   background-color: #96cddf;
 }
@@ -104,4 +121,26 @@ button.logout:hover, button.save:hover, .dropdown-toggle:hover {
 .edit-profile:hover {
   transition: 300ms;
   background-color: #ffc966;
+  z-index: 100;
+}
+
+/*. TODO implement the background blur on hover of row */
+div.blur {
+  position: fixed;
+  display: block;
+  background-color: black;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  z-index: -1000;
+}
+
+.hovering:hover div.blur {
+  position: fixed;
+  display: block;
+  background-color: black;
+  width: 100%;
+  height: 100%;
+  opacity: 1;
+  z-index: 10;
 }

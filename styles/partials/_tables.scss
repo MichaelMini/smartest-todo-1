@@ -11,8 +11,18 @@ td, th {
 }
 
 .todolist-main {
+   animation-duration: 500ms;
+   transition-timing-function: ease-in;
+
+  animation-name: slidein;
 @extend .shadow;
 }
+
+
+
+
+
+
 
 .hovering {
   transition: 300ms;
@@ -20,7 +30,7 @@ td, th {
 }
 
 .hovering:hover {
-  transform: scale(1.08);
+  transform: scale(1.05);
   transition: 300ms;
   background-color:  darken($brand-blue, 16);
   @extend .shadow;
