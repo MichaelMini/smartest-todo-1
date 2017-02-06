@@ -1,5 +1,43 @@
+// <ul class="nav nav-pills left">
+//                         <li class="dropdown active span8">
+//                           <a class="dropdown-toggle" id="inp_impact" data-toggle="dropdown">
+//                             <i class="icon icon-envelope icon-white"></i> <span id="text">Suggestion</span><span class="caret"></span>
+//                           </a>
+//                           <ul ID="divNewNotifications" class="dropdown-menu">
+//                             <li><a>Food</a></li>
+//                             <li><a>Movies</a></li>
+//                             <li><a>Books</a></li>
+//                             <li><a>Products</a></li>
+//                           </ul>
+//                         </li>
+//                       </ul>
 
+<<<<<<< HEAD
 
+=======
+function insertEntryInTodoList($domTable, entry){
+  // var row = $("<tr>").addClass('api-result');
+  // var firstCol = $("<td>")//.text(entry.id);
+  // var secondCol = $("<td>").addClass('api-name').text(entry.name);
+  // var sourceCol = $("<td>").addClass('api-source').text(entry.source);
+  // // var thirdCol = $("<td>").addClass('api-category').text(entry.category);
+  // row.append(secondCol).append(sourceCol);
+  // $domTable.append(row);
+ //  var row = $("<tr>").addClass('api-result');
+ // var firstCol = $("<th>")//.text(entry.id);
+ //  var secondCol = $("<th>").text('name');
+ //  var sourceCol = $("<th>").text('category');
+ //  // var thirdCol = $("<td>").addClass('api-category').text(entry.category);
+ //  row.append(secondCol).append(sourceCol);
+ //  $domTable.prepend(row);
+console.log(entry);
+  $('#todo-item').text(entry.todo);
+  $('#search-item').text(entry.name);
+  $('#text').text(entry.category);
+  $('.api-source').text(entry.source);
+  $('#idnum').text(entry.id);
+}
+>>>>>>> parent of 8d847c1... moving some stuff around, just minor
 
 $(function(){
   // $(".save-button").hide()
@@ -29,7 +67,6 @@ $(function(){
         console.log('from goodread.js in public/scripts:', data);
       }
     });
-
     // TODO: maybe some error handling on the ajax call?
     //        -- including a .catch for exceptions
     //        -- including the possiblity that the backend says "fuck no"
@@ -47,7 +84,7 @@ $(function(){
     var userId = $('#user-id').text();
     var apiSource = $('#api-source').text();
     var done_status = false;
-    // var apiSource = $('#api-source').text();
+    var apiSource = $('.api-source').text();
 
 
     savedTodo.name = name;
@@ -70,6 +107,7 @@ $(function(){
 
     $tr.find('.category').text(category);
     $tr.find('.search-item').text(name);
+
   })
 
 })
