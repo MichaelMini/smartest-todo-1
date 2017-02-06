@@ -3,11 +3,15 @@ td, th {
 }
 
 .todo_search {
-  background-color:  $brand-orange;
+  margin-top: 20px;
+  @extend .top-line;
+
+  background-color:  darken($brand-orange, 16);
+  @extend .shadow;
 }
 
 .todolist-main {
-
+@extend .shadow;
 }
 
 .hovering {
@@ -18,11 +22,8 @@ td, th {
 .hovering:hover {
   transform: scale(1.08);
   transition: 300ms;
-  background-color:  darken($brand-blue, 10);
-  -webkit-box-shadow: 0px 5px 13px -4px rgba(0,0,0,0.75);
--moz-box-shadow: 0px 5px 13px -4px rgba(0,0,0,0.75);
-box-shadow: 0px 5px 13px -4px rgba(0,0,0,0.75);
-
+  background-color:  darken($brand-blue, 16);
+  @extend .shadow;
 }
 
 
@@ -35,6 +36,9 @@ box-shadow: 0px 5px 13px -4px rgba(0,0,0,0.75);
   margin-bottom: 100px;
 }
 
-.todo_search{
-  padding: 10px 0;
+
+
+.main-todo-header {
+  @extend .top-line;
+  background-color: $brand-orange;
 }

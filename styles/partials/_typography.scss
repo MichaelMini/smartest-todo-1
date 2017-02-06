@@ -1,7 +1,20 @@
-  h1 {
-    color: #244751;
+  h1, h2, h3, h4, h5, h6 {
+    color: $brand-blue;
   }
 
 tr {
-  border-bottom: 1px solid black;
+  @extend .underline;
+}
+
+button.logout{
+  transition: 300ms;
+  border-radius: 3px;
+  background-color: $brand-blue;
+}
+
+button.logout:hover {
+  transition: 300ms;
+  background-color: $brand-orange;
+  @extend .scale;
+  @extend .shadow;
 }

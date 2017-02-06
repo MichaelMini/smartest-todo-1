@@ -42,11 +42,11 @@ $(".todo_search").hide()
   $('[action="/search"]').on('submit', function(event) {
     // TODO: blank the search bar
     event.preventDefault();
-    if ($(".todo_search").is(':hidden')) {
-      $(".todo_search").slideDown( "slow");
-    }
+    // if ($(".todo_search").is(':hidden')) {
+    //   $(".todo_search").slideDown( "fast");
+    // }
 
-    $(".todo_search").slideDown( "slow");
+    $(".todo_search").slideDown( "fast");
 
       // $('div.todo_search').addClass('reveal')
 

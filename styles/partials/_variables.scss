@@ -1,4 +1,26 @@
-$brand-grey: lighten(grey, 40);
+$brand-grey: lighten(grey, 20);
 $brand-orange: lighten(orange, 20);
-$brand-blue: lighten(blue, 40);
+$brand-blue: lighten(lightblue, 10);
+
 $brand-yellow: lighten(yellow, 40);
+
+.shadow{
+ -webkit-box-shadow: 0px 4px 15px -3px rgba(0,0,0,0.75);
+-moz-box-shadow: 0px 4px 15px -3px rgba(0,0,0,0.75);
+box-shadow: 0px 4px 15px -3px rgba(0,0,0,0.75);
+}
+
+.underline {
+  border-bottom: 1px solid darken(lightblue, 30);
+}
+.top-line{
+  border-top: 5px solid darken(lightblue, 30);
+}
+
+.bottom-line{
+  border-bottom: 5px solid darken(lightblue, 30);
+}
+
+.scale {
+  transform: scale(1.05);
+}

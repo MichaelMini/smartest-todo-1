@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Home Page</title>
+    <title>Smartest Todo</title>
     <%- include('partials/_head')%>
   </head>
   <body>
@@ -14,11 +14,20 @@
           <div class="container-fluid">
             <div class="row">
               <table class="todolist-main col-xs-12 col-sm-8 col-sm-offset-2">
+                <tr class="main-todo-header">
+                  <th></th>
+                  <th>Todos</th>
+                  <th>Category</th>
+                  <th>Source</th>
+
+
+                </tr>
                 <% for (var item of todo_items) { %>
                   <tr class="hovering">
+                  <td> <input type="checkbox" id="cbox1" value="first_checkbox"> </td>
                     <td> <%= item.name %> </td>
                     <td> <%= item.category %> </td>
-                    <td> <%= item.img %> </td>
+
                     <td> <%= item.source %> </td>
 
                   </tr>

@@ -1,15 +1,15 @@
 <nav class="navbar navbar-default navbar-inverse">
   <div class="container-fluid">
-  <h5 class="navbar-left">This is Smartest Todo List</h5>
+    <h3 class="navbar-left">Smartest Todo List Ever</h3>
     <div class="navbar-header navbar-right">
-    <form action="/logout" method="POST" class="navbar-form navbar-right" role="search">
+      <form action="/logout" method="POST" class="navbar-form navbar-right" role="search">
         <div class="form-group">
-          <button type="submit" class="btn btn-default">Logout</button>
+          <button type="submit" class="btn btn-default logout">Logout</button>
         </div>
       </form>
-      <h1 class="navbar-brand navbar-right" href="#">
-        What would you like  <%= user_name %>?
-      </h1>
+      <h4 class=" navbar-right">
+         Things for <%= user_name %> todo
+      </h4>
       <i class="hidden" id="user-id"><%= user_id %></i>
     </div>
   </div>
