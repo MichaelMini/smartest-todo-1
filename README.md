@@ -1,4 +1,10 @@
 
+# Smartest Todo app
+
+## Midterm Project
+
+Work in progress
+
 # Node Skeleton
 
 ## Project Setup
